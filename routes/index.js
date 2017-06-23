@@ -1,0 +1,73 @@
+var express = require('express');
+var router = express.Router();
+var Rainbow = require('rainbowvis.js');
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'The Rosaceae Project' });
+});
+
+router.get('/index', function(req, res, next) {
+  res.render('index', { title: 'The Rosaceae Project' });
+});
+
+
+router.get('/about', function(req, res, next) {
+  res.render('about', { title: 'The Rosaceae Project' });
+});
+
+router.get('/test', function(req, res, next) {
+  res.render('test2', { title: 'The Rosaceae Project' });
+});
+
+
+router.get('/rubus_form', function(req, res, next) {
+  res.render('rubus_form', { title: 'Rubus EFP' });
+});
+
+router.get('/rubus_batch_form', function(req, res, next) {
+  res.render('rubus_batch_form', { title: 'Rubus EFP' });
+});
+
+
+router.post('/rubus_response', function(req, res) {
+    var db = req.db;
+    var collection = db.get('rubus');
+    var gene = req.body.gene;
+
+  collection.find({ "gene_id": gene},{},function(e,docs){
+      msg = "";
+      if (docs.length == 0)
+      {
+        res.render('error', {message: "Not a valid rubus id"});
+      }
+      else{
+        res.render('rubus_response',{gene_id:gene,response:JSON.stringify(docs)})
+      }
+
+    });
+});
+
+
+router.post('/get_gene', function(req, res) {
+    var db = req.db;
+    var collection = db.get('rubus');
+    var gene = req.body.gene;
+
+   collection.find({ "gene_id": gene},{},function(e,docs){
+          if (docs.length == 0)
+          {
+            res.send({message: "not found",gene_id:gene});
+          }
+          else{
+            var json = docs[0];
+            var exp_data = json.stage_0.concat(json.stage_2,json.stage_4,json.stage_6,json.stage_9,json.stage_12);
+            res.send({message:"found", gene_id:gene, tpm:exp_data});
+          }
+   });
+
+});
+
+
+
+module.exports = router;

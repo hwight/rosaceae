@@ -1,0 +1,357 @@
+doctype html
+html.no-js(lang='en')
+  head
+    // title and meta
+    meta(charset='utf-8')
+    meta(content='width=device-width,initial-scale=1.0', name='viewport')
+    title The Rosaceae Project
+    // js
+    script(src="https://cdn.rawgit.com/eligrey/Blob.js/0cef2746414269b16834878a8abc52eb9d53e6bd/Blob.js")
+    script(src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js")
+    script(src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    script(src='http://jquery-imagefit-plugin.googlecode.com/svn/trunk/jquery.imagefit-0.2.js')
+    script(src='http://html2canvas.hertzen.com/build/html2canvas.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/modernizr.js')
+    script(src='/javascripts/rainbow.js')
+    script(src='/javascripts/plotly-latest.min.js')
+    script(src='/javascripts/create_efp.js')
+    // css
+    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    link(rel="stylesheet",href='/stylesheets/rubus_response_style.css')
+  body
+    nav.navbar
+      .container-fluid
+        ul.nav.navbar-nav
+          li.active
+            a(href='/') Home
+          li.active
+            a(href='/about') About
+          li.active
+            a(href='#') Events
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Fragaria vesca
+              span.caret
+            ul.dropdown-menu
+              li.dropdown-header
+                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+              li.dropdown-header
+                a(href='https://tinyurl.com/liuCoexp') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Malus domestica
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+              li
+                a(href='https://tinyurl.com/liuCoexp') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Prunus persica
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='#') EFP
+              li
+                a(href='#') batch expression analysis
+              li
+                a(href='#') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Rubus idaeus
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='/rubus_form') EFP
+              li
+                a(href='/rubus_batch_form') batch expression analysis
+              li
+                a(href='#') coexpression network
+    p#json_res.hidden= response
+    h1#geneName
+    .EFP#EFP_content
+      .content
+        h3#EFP_header EFP
+        .scale
+          p4.scale log(tpm)
+          canvas#myCanvas(width='300', height='30')
+          .contain
+            div#l1 1
+            div#l2 2
+            div#l3 3
+            div#l4 4
+        .stage0
+          img.stage_0#r0(src="/images/receptacle.png")
+          img.stage_0#w0(src="/images/wall.png")
+          img.stage_0#s0(src="/images/seed.png")
+          img.stage_0(src="/images/outline.png")
+          p.stage0_cap 0 DPA
+        .stage2
+          img.stage_2#r2(src="/images/receptacle.png")
+          img.stage_2#w2(src="/images/wall.png")
+          img.stage_2#s2(src="/images/seed.png")
+          img.stage_2(src="/images/outline.png")
+          p.stage2_cap 2 DPA
+        .stage4
+          img.stage_4#r4(src="/images/receptacle.png")
+          img.stage_4#w4(src="/images/wall.png")
+          img.stage_4#s4(src="/images/seed.png")
+          img.stage_4(src="/images/outline.png")
+          p.stage4_cap 4 DPA
+        .stage6
+          img.stage_6#r6(src="/images/receptacle.png")
+          img.stage_6#w6(src="/images/wall.png")
+          img.stage_6#s6(src="/images/seed.png")
+          img.stage_6(src="/images/outline.png")
+          p.stage6_cap 6 DPA
+        .stage9
+          img.stage_9#r9(src="/images/receptacle.png")
+          img.stage_9#w9(src="/images/wall.png")
+          img.stage_9#s9(src="/images/seed.png")
+          img.stage_9(src="/images/outline.png")
+          p.stage9_cap 9 DPA
+        .stage12
+          img.stage_12#r12(src="/images/receptacle.png")
+          img.stage_12#w12(src="/images/wall.png")
+          img.stage_12#s12(src="/images/seed.png")
+          img.stage_12(src="/images/outline.png")
+          p.stage12_cap 12 DPA
+        .container#EFP
+          button.btn.btn-info.btn-xs#modalButton(type='button', data-toggle='modal', data-target='#myModal') Adjust Scale
+          // Modal
+          #myModal.modal.fade(role='dialog')
+            .modal-dialog
+              // Modal content
+              .modal-content
+                .modal-header
+                  button.close(type='button', data-dismiss='modal') ×
+                  h4.modal-title Change the max value on the log(tpm) scale in the EFP.
+                .modal-body
+                  form
+                    .form-group
+                      label.form-control-label(for='max') Maximum:
+                      input#num.form-control(type='number')
+                      .modal-footer
+                        button.btn.btn-default(type='button',onclick="change_max()") Enter
+          p
+          button.btn.btn-info.btn-xs#btnSave(type='button',onclick="save_efp()") Save EFP
+          p
+          button.btn.btn-info.btn-xs#Description(type='button', data-toggle='modal', data-target='#key') Description
+
+          #key.modal.fade(role='dialog')
+            .modal-dialog#overwrite
+              // Modal content
+              .modal-content
+                .modal-header
+                  button.close(type='button', data-dismiss='modal') ×
+                .modal-body
+                  img.img-responsive.center-block(src="/images/key.png", style='width: 300px; height: 264px;')
+                  br
+                  br
+                  p DPA = days post anthesis (days after the flower is fertilized)
+    .BarGraph
+      h3 Bar Graph
+      div.buttons
+        button.btn.btn-default.myButton#graphShow(type='button', onclick = "show_graph()")
+          span.glyphicon.glyphicon-plus
+        button.btn.btn-default.myButton#graphHide(type='button', onclick = "hide_graph()")
+            span.glyphicon.glyphicon-minus
+      .outer
+        #myDiv.inner(style='width: 580px; height: 400px;')
+        button.btn.btn-default#groupBySomething(type='button', onclick = "groupBy(this.innerHTML)") Group By Stage
+        br
+        br
+    .Raw
+      h3 Raw data
+      div.buttons
+        button.btn.btn-default.myButton#dataShow(type='button', onclick = "show_table()")
+          span.glyphicon.glyphicon-plus
+        button.btn.btn-default.myButton#dataHide(type='button', onclick = "hide_table()")
+            span.glyphicon.glyphicon-minus
+
+      table.raw_table.table.table-striped.table-hover.center-block(style='width:100%')
+        tr
+          th Sample
+          th Log(TPM)
+        tr
+          td receptacle_0
+          td#3
+        tr
+          td receptacle_0
+          td#4
+        tr
+          td receptacle_0
+          td#5
+        tr
+          td seed_0
+          td#0
+        tr
+          td seed_0
+          td#1
+        tr
+          td seed_0
+          td#2
+        tr
+          td wall_0
+          td#36
+        tr
+          td wall_0
+          td#37
+        tr
+          td wall_0
+          td#38
+        tr
+          td receptacle_2
+          td#9
+        tr
+          td receptacle_2
+          td#10
+        tr
+          td receptacle_2
+          td#11
+        tr
+          td seed_2
+          td#24
+        tr
+          td seed_2
+          td#25
+        tr
+          td seed_2
+          td#26
+        tr
+          td wall_2
+          td#42
+        tr
+          td wall_2
+          td#43
+        tr
+          td wall_2
+          td#44
+        tr
+          td receptacle_4
+          td#12
+        tr
+          td receptacle_4
+          td#13
+        tr
+          td receptacle_4
+          td#14
+        tr
+          td seed_4
+          td#27
+        tr
+          td seed_4
+          td#28
+        tr
+          td seed_4
+          td#29
+        tr
+          td wall_4
+          td#45
+        tr
+          td wall_4
+          td#46
+        tr
+          td wall_4
+          td#47
+        tr
+          td receptacle_6
+          td#15
+        tr
+          td receptacle_6
+          td#16
+        tr
+          td receptacle_6
+          td#17
+        tr
+          td seed_6
+          td#30
+        tr
+          td seed_6
+          td#31
+        tr
+          td seed_6
+          td#32
+        tr
+          td wall_6
+          td#48
+        tr
+          td wall_6
+          td#49
+        tr
+          td wall_6
+          td#50
+        tr
+          td receptacle_9
+          td#18
+        tr
+          td receptacle_9
+          td#19
+        tr
+          td receptacle_9
+          td#20
+        tr
+          td seed_9
+          td#33
+        tr
+          td seed_9
+          td#34
+        tr
+          td seed_9
+          td#35
+        tr
+          td wall_9
+          td#51
+        tr
+          td wall_9
+          td#52
+        tr
+          td wall_9
+          td#53
+        tr
+          td receptacle_12
+          td#6
+        tr
+          td receptacle_12
+          td#7
+        tr
+         td receptacle_12
+         td#8
+        tr
+         td seed_12
+         td#21
+        tr
+          td seed_12
+          td#22
+        tr
+          td seed_12
+          td#23
+        tr
+          td wall_12
+          td#39
+        tr
+          td wall_12
+          td#40
+        tr
+          td wall_12
+          td#41
+
+    .Ortho
+      h3 Orthologues
+      div.buttons
+        button.btn.btn-default.myButton#orthoShow(type='button', onclick = "show_orth()")
+          span.glyphicon.glyphicon-plus
+        button.btn.btn-default.myButton#orthoHide(type='button', onclick = "hide_orth()")
+            span.glyphicon.glyphicon-minus
+      div.orth_list
+        p Fragaria vesca
+          ul#frag
+        p Malus domestica
+          ul#malus
+        p Prunus persica
+          ul#prunus
+        p Pyrus communis
+          ul#pyrus

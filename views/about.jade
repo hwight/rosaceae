@@ -1,0 +1,135 @@
+doctype html
+html.no-js(lang='en')
+  head
+    script.
+      $(document).ready(function () {
+      $('.dropdown-toggle').dropdown();
+      });
+    // title and meta
+    meta(charset='utf-8')
+    meta(content='width=device-width,initial-scale=1.0', name='viewport')
+    title About Us
+    // css
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto+Slab')
+    link(rel='stylesheet', href='/stylesheets/base.css')
+    link(rel='stylesheet', href='/stylesheets/style_parallax.css')
+    link(rel="stylesheet","/stylesheets/style.css")
+    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    script(src="/javascripts/bootstrap.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    script(src='/javascripts/bootstrap.min.js')
+    // js
+    script(src='/javascripts/modernizr.js')
+  body.bg
+    nav.navbar
+      .container-fluid
+        ul.nav.navbar-nav
+          li.active
+            a(href='/') Home
+          li.active
+            a(href='/about') About
+          li.active
+            a(href='#') Events
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Fragaria vesca
+              span.caret
+            ul.dropdown-menu
+              li.dropdown-header
+                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+              li.dropdown-header
+                a(href='https://tinyurl.com/liuCoexp') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Malus domestica
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+              li
+                a(href='https://tinyurl.com/liuCoexp') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Prunus persica
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='#') EFP
+              li
+                a(href='#') batch expression analysis
+              li
+                a(href='#') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Rubus idaeus
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='/rubus_form') EFP
+              li
+                a(href='/rubus_batch_form') batch expression analysis
+              li
+                a(href='#') coexpression network
+    .wrapper
+      main
+        section.module.parallax.parallax-1
+          .container
+            h1 Research
+        section.module.content
+          .container
+            h2 Comparative Analysis of Early Fruit Development within the Rosaceae Family
+            p
+              | Despite centuries of intensive genetic selection of agriculturally valuable fruit, we still lack a molecular understanding of the mechanisms involved in fruit formation. Fruits are a major evolutionary innovation of angiosperms that protect developing seeds and facilitate offspring dispersal. Common to all fleshy fruit is the expansion of tissue near the seed in a coordinated manner with seed development. However, the specific tissue that expands can originate from a variety of floral parts resulting in different fruit morphologies. How this remarkable diversity of fruit types is achieved is currently unknown. This NSF-funded project investigates the molecular genetic mechanisms that underlie the phenotypic diversity of fleshy fruits in Rosaceae.
+            p
+              | Rosaceae is an immensely important plant family that includes several high-value fruit and ornamental crop species. Recent investment in genome sequencing in a handful of Rosaceae species including apple, strawberry, peach, plum, and raspberry, provides an unprecedented opportunity to investigate the genetic mechanisms underlying the diversity of fleshy fruits, as well as the evolution of these mechanisms in this family.
+            p
+              | We will describe in detail morphological progression of flower and early stage fruit development. This knowledge will guide sample collection for RNA-seq immediately before and after fertilization in specific floral tissues in apple, peach, raspberry, and strawberry. Innovative bioinformatic tools and strategies will be developed to identify toolkit genes and regulatory gene networks, whose spatial or temporal shifts of expression may alter fleshy fruit programs in different species. Functional tests will be carried out to test the function of predicted toolkit genes using strawberry, FasTrack plum, and apple, for which transformation methods have been established. The ultimate goal is to identify causal relationships between changes of toolkit gene expression and evolution of distinct fleshy fruit types.
+        section.module.parallax.parallax-2
+          .container
+            h1 Outreach
+        section.module.content
+          .container
+            h2 Previously Held Events
+            p
+              | On Oct 18 2015, we held an open house tour as part of our local Apple Harvest Festival at the Appalachian Fruit Research Laboratory, USDA-ARS in Kearneysville, West Virginia. We hosted more than 200 students, teachers, and parents. As part of these tours, we highlighted our NSF projects.
+            p
+              | In August 8-12 2016, we held a bioinformatic workshop for high school teachers on the campus of Univ. of Maryland. Most participating teachers came from Prince George County Public Schools of Maryland. A few teachers brought two students along. The weeklong workshop covered a wide range of topics including DNA barcode, phylogenetic analysis, GMO crops, gene expression analysis, gene annotation, and CRISPR. The teachers also visited the NGS sequencing facility on campus.
+        section.module.parallax.parallax-3
+          .container
+            h1 Our Team
+        section.module.content
+          .container
+            h4 PI
+            ul.people
+              li
+                a(href='http://www.clfs.umd.edu/CBMG/faculty/Liu/lab/') Dr. Zhongchi Liu
+                | , University of Maryland
+            h4 Co-PI
+            ul.people
+              li
+                a(href='http://www.cbcb.umd.edu/~sridhar/') Sridhar Hannenhalli
+                | , University of Maryland
+              li
+                a(href='http://www.ars.usda.gov/pandp/people/people.htm?personid=37093') Chris Dardick
+                | , Appalanchian Fruit Research Lab. ARS, USDA
+              li
+                a(href='http://www.ars.usda.gov/pandp/people/people.htm?personid=830') Ann Callahan
+                | , Appalanchian Fruit Research Lab. ARS, USDA
+            h4 Postdocs
+            ul.people
+              li Junhui Zhou, University of Maryland
+              li Hiren Karathia, University of Maryland
+              li Kelsey Galimba, University of Maryland and ARS, USDA
+            h4 Graduate Students
+            ul.people
+              li Haley Wight, University of Maryland
+            p
+              strong Undergraduate summer interns
+            ul
+              li
+                strong
+                | Christopher Zowaro (2016)
+              li Janai Heise (2016)
+              li
+                | Erin Schiksnis (2016)
+                br

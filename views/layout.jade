@@ -1,0 +1,70 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet","/stylesheets/style.css")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    script(src="/javascripts/bootstrap.js")
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/create_efp.js')
+    script(src='/javascripts/plotly-latest.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+    script(src='/javascripts/batch_analysis.js')
+    script.
+      $(document).ready(function () {
+      $('.dropdown-toggle').dropdown();
+      });
+
+
+  body
+    nav.navbar
+      .container-fluid
+        ul.nav.navbar-nav
+          li.active
+            a(href='/') Home
+          li.active
+            a(href='/about') About
+          li.active
+            a(href='#') Events
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Fragaria vesca
+              span.caret
+            ul.dropdown-menu
+              li.dropdown-header
+                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+              li.dropdown-header
+                a(href='https://tinyurl.com/liuCoexp') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Malus domestica
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+              li
+                a(href='https://tinyurl.com/liuCoexp') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Prunus persica
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='#') EFP
+              li
+                a(href='#') batch expression analysis
+              li
+                a(href='#') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Rubus idaeus
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='/rubus_form') EFP
+              li
+                a(href='/rubus_batch_form') batch expression analysis
+              li
+                a(href='#') coexpression network
+    block content

@@ -1,0 +1,103 @@
+body {
+  background: url("/images/DNA.png") center center fixed;
+  background-repeat: no-repeat;
+  background-position: 0px 80px;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: 100% 100%;
+}
+
+
+a {
+  color: #00B7FF;
+}
+
+
+p {
+    font-size: 6px;
+    font-size: 1.1vw;
+}
+
+h1 {
+    font-size: 8px;
+    font-size: 1vw;
+}
+
+
+@keyframes appleFade {
+  0% {opacity: 0;}
+  20% {opacity: 1;}
+  33% {opacity: 1;}
+  53% {opacity: 0;}
+  100% {opacity: 0;}
+}
+
+@keyframes peachFade {
+  0% {opacity: 0;}
+  20% {opacity: 0;}
+  33% {opacity: 0;}
+  53% {opacity: 1;}
+  93% {opacity: 1;}
+  100% {opacity: .5;}
+}
+
+#apple{
+  position:fixed;
+  left:19%;
+  top:43%;
+  height:30%;
+  animation-name: appleFade;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+}
+#peach{
+  position:fixed;
+  left:19%;
+  top:39%;
+  height:35%;
+  animation-name: peachFade;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+}
+
+#straw{
+  position:fixed;
+  right:15%;
+  top:42%;
+  height:29%;
+  animation-name: appleFade;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+}
+
+#ras{
+  position:fixed;
+  right:15%;
+  top:42%;
+  height:30%;
+  animation-name: peachFade;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+}
+
+
+.centered {
+  position: fixed;
+  top: 15%;
+  left: 39%;
+  padding:15px;
+}
+
+.outer{
+  width:100%;
+  text-align: center;
+}
+.inner{
+  display: inline-block;
+}
+  

@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1= title
+    form#form(method="post",action="/rubus_batch")
+        p Add a comma separated list of genes below
+        textarea#genelist(cols="45",rows="5",placeholder="Bras_G00018, Bras_G00054, Bras_G00078,...", name="gene")
+        p
+        button#btnSubmit(type="button",onclick="db_calls()") Submit
+    #responses.hidden
+    #myDiv(style='width: 580px; height: 500px; padding-left:5em;')

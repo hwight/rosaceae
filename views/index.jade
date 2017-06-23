@@ -1,0 +1,81 @@
+doctype html
+html.no-js(lang='en')
+  head
+    script.
+      $(document).ready(function () {
+      $('.dropdown-toggle').dropdown();
+      });
+    // title and meta
+    meta(charset='utf-8')
+    meta(content='width=device-width,initial-scale=1.0', name='viewport')
+    title The Rosaceae Project
+    // js
+    script(src="/javascripts/bootstrap.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    script(src='http://jquery-imagefit-plugin.googlecode.com/svn/trunk/jquery.imagefit-0.2.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/modernizr.js')
+    script.
+    // css
+    link(rel="stylesheet",href="/stylesheets/style.css")
+    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+  body
+    nav.navbar
+      .container-fluid
+        ul.nav.navbar-nav
+          li.active
+            a(href='/') Home
+          li.active
+            a(href='/about') About
+          li.active
+            a(href='#') Events
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Fragaria vesca
+              span.caret
+            ul.dropdown-menu
+              li.dropdown-header
+                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+              li.dropdown-header
+                a(href='https://tinyurl.com/liuCoexp') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Malus domestica
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+              li
+                a(href='https://tinyurl.com/liuCoexp') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Prunus persica
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='/rubus_form') EFP
+              li
+                a(href='/rubus_batch_form') batch expression analysis
+              li
+                a(href='#') coexpression network
+          li.dropdown
+            a.dropdown-toggle(data-toggle='dropdown', href='#')
+              | Rubus idaeus
+              span.caret
+            ul.dropdown-menu
+              li
+                a(href='/rubus_form') EFP
+              li
+                a(href='/rubus_batch_form') batch expression analysis
+              li
+                a(href='#') coexpression network
+    .centered
+      h3(align='center') The Rosaceae Project
+      p(align='center') Funded by the NSF
+      p(align='center') Managed by the USDA and University of Maryland
+    div.tree_fruits
+      img#apple(src="/images/apple_test.jpeg")
+      img#peach(src="/images/peach2.png")
+    .berries
+      img#straw(src="/images/strawberry2.png")
+      img#ras(src="/images/raspberry2.png")
