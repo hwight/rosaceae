@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var monk = require('monk');
 
-var db = monk('localhost:27017/ros');
+var db = monk('mongodb://user:readonly@ds135382.mlab.com:35382/ros');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
