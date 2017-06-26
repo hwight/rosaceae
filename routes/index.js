@@ -7,6 +7,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'The Rosaceae Project' });
 });
 
+router.get('//', function(req, res, next) {
+  res.render('index', { title: 'The Rosaceae Project' });
+});
+
 router.get('/index', function(req, res, next) {
   res.render('index', { title: 'The Rosaceae Project' });
 });
