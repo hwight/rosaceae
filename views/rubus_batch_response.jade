@@ -1,25 +1,22 @@
 doctype html
-html.no-js(lang='en')
+html
   head
-    // title and meta
-    meta(charset='utf-8')
-    meta(content='width=device-width,initial-scale=1.0', name='viewport')
-    title The Rosaceae Project
-    // js
-    script(src="https://cdn.rawgit.com/eligrey/Blob.js/0cef2746414269b16834878a8abc52eb9d53e6bd/Blob.js")
-    script(src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js")
-    script(src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js")
+    title= title
+    link(rel="stylesheet","/stylesheets/style.css")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-    script(src='http://jquery-imagefit-plugin.googlecode.com/svn/trunk/jquery.imagefit-0.2.js')
-    script(src='http://html2canvas.hertzen.com/build/html2canvas.js')
-    script(src='/javascripts/bootstrap.min.js')
-    script(src='/javascripts/modernizr.js')
-    script(src='/javascripts/rainbow.js')
-    script(src='/javascripts/plotly-latest.min.js')
-    // css
     link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-    link(rel="stylesheet",href='/stylesheets/rubus_response_style.css')
-  body
+    script(src="/javascripts/bootstrap.js")
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+    script(src='/javascripts/batch_analysis.js')
+    link(rel='stylesheet', href='/stylesheets/submenu.css')
+    script.
+      $(document).ready(function () {
+      $('.dropdown-toggle').dropdown();
+      });
+
+
+  body.bg
     nav.navbar
       .container-fluid
         ul.nav.navbar-nav
@@ -28,47 +25,38 @@ html.no-js(lang='en')
           li.active
             a(href='/about') About
           li.active
-            a(href='#') Events
-          li.dropdown
-            a.dropdown-toggle(data-toggle='dropdown', href='#')
-              | Fragaria vesca
-              span.caret
-            ul.dropdown-menu
-              li.dropdown-header
-                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
-              li.dropdown-header
-                a(href='https://tinyurl.com/liuCoexp') coexpression network
-          li.dropdown
-            a.dropdown-toggle(data-toggle='dropdown', href='#')
-              | Malus domestica
-              span.caret
-            ul.dropdown-menu
-              li
-                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
-              li
-                a(href='https://tinyurl.com/liuCoexp') coexpression network
-          li.dropdown
-            a.dropdown-toggle(data-toggle='dropdown', href='#')
-              | Prunus persica
-              span.caret
-            ul.dropdown-menu
-              li
-                a(href='#') EFP
-              li
-                a(href='#') batch expression analysis
-              li
-                a(href='#') coexpression network
-          li.dropdown
-            a.dropdown-toggle(data-toggle='dropdown', href='#')
-              | Rubus idaeus
-              span.caret
-            ul.dropdown-menu
-              li
-                a(href='#') EFP
-              li
-                a(href='#') batch expression analysis
-              li
-                a(href='#') coexpression network
+            a(href='/events') Events
+          li.active
+            a(href='/publications') Publications
+          li
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              | Tools
+              b.caret
+            ul.dropdown-menu.multi-level
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Fragaria vesca
+                ul.dropdown-menu
+                  li
+                    a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+                  li
+                    a(href='https://tinyurl.com/liuCoexp') Coexpression Network
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Rubus idaeus
+                ul.dropdown-menu
+                  li
+                    a(href='/rubus_form') EFP
+                  li
+                    a(href='/rubus_batch_form') Batch Analysis
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Prunus persica
+                ul.dropdown-menu
+                  li
+                    a(href='#') Coming soon!
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Malus domestica
+                ul.dropdown-menu
+                  li
+                    a(href='#') Coming soon!
     p#json= gene_info
     p Hello
     p= message

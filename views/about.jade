@@ -9,16 +9,16 @@ html.no-js(lang='en')
     meta(charset='utf-8')
     meta(content='width=device-width,initial-scale=1.0', name='viewport')
     title About Us
-    // css
+    // css and js
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto+Slab')
     link(rel='stylesheet', href='/stylesheets/base.css')
     link(rel='stylesheet', href='/stylesheets/style_parallax.css')
     link(rel="stylesheet","/stylesheets/style.css")
     link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    link(rel='stylesheet', href='/stylesheets/submenu.css')
     script(src="/javascripts/bootstrap.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
     script(src='/javascripts/bootstrap.min.js')
-    // js
     script(src='/javascripts/modernizr.js')
   body.bg
     nav.navbar
@@ -29,47 +29,38 @@ html.no-js(lang='en')
           li.active
             a(href='/about') About
           li.active
-            a(href='#') Events
-          li.dropdown
-            a.dropdown-toggle(data-toggle='dropdown', href='#')
-              | Fragaria vesca
-              span.caret
-            ul.dropdown-menu
-              li.dropdown-header
-                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
-              li.dropdown-header
-                a(href='https://tinyurl.com/liuCoexp') coexpression network
-          li.dropdown
-            a.dropdown-toggle(data-toggle='dropdown', href='#')
-              | Malus domestica
-              span.caret
-            ul.dropdown-menu
-              li
-                a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
-              li
-                a(href='https://tinyurl.com/liuCoexp') coexpression network
-          li.dropdown
-            a.dropdown-toggle(data-toggle='dropdown', href='#')
-              | Prunus persica
-              span.caret
-            ul.dropdown-menu
-              li
-                a(href='#') EFP
-              li
-                a(href='#') batch expression analysis
-              li
-                a(href='#') coexpression network
-          li.dropdown
-            a.dropdown-toggle(data-toggle='dropdown', href='#')
-              | Rubus idaeus
-              span.caret
-            ul.dropdown-menu
-              li
-                a(href='/rubus_form') EFP
-              li
-                a(href='/rubus_batch_form') batch expression analysis
-              li
-                a(href='#') coexpression network
+            a(href='/events') Events
+          li.active
+            a(href='/publications') Publications
+          li
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              | Tools
+              b.caret
+            ul.dropdown-menu.multi-level
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Fragaria vesca
+                ul.dropdown-menu
+                  li
+                    a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+                  li
+                    a(href='https://tinyurl.com/liuCoexp') Coexpression Network
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Rubus idaeus
+                ul.dropdown-menu
+                  li
+                    a(href='/rubus_form') EFP
+                  li
+                    a(href='/rubus_batch_form') Batch Analysis
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Prunus persica
+                ul.dropdown-menu
+                  li
+                    a(href='#') Coming soon!
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Malus domestica
+                ul.dropdown-menu
+                  li
+                    a(href='#') Coming soon!
     .wrapper
       main
         section.module.parallax.parallax-1
@@ -122,14 +113,14 @@ html.no-js(lang='en')
               li Kelsey Galimba, University of Maryland and ARS, USDA
             h4 Graduate Students
             ul.people
+              li Charles Dawkins, University of Maryland (Graduated, PhD)
               li Haley Wight, University of Maryland
-            p
-              strong Undergraduate summer interns
-            ul
-              li
-                strong
-                | Christopher Zowaro (2016)
+            h4 Undergraduate Researchers
+            ul.people
+              li Christopher Zowaro (2016-2017)
+              li Nancy Ampadu (2017)
+              li Cierra Payne (2017)
+              li Ayub Khan (2017)
               li Janai Heise (2016)
-              li
-                | Erin Schiksnis (2016)
-                br
+              li Erin Schiksnis (2016)
+              br

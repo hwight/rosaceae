@@ -1,0 +1,102 @@
+doctype html
+html.no-js(lang='en')
+  head
+    script.
+      $(document).ready(function () {
+      $('.dropdown-toggle').dropdown();
+      });
+
+    // title and meta
+    meta(charset='utf-8')
+    meta(content='width=device-width,initial-scale=1.0', name='viewport')
+    title Events
+    // css
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto+Slab')
+    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    script(src="/javascripts/bootstrap.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    script(src='/javascripts/bootstrap.min.js')
+    link(rel='stylesheet', href='/stylesheets/submenu.css')
+    style.
+      #test,#test2{
+      font-size: 1em;
+      }
+      .previous-events{
+      padding:.5em;
+      }
+  body.bg
+    nav.navbar
+      .container-fluid
+        ul.nav.navbar-nav
+          li.active
+            a(href='/') Home
+          li.active
+            a(href='/about') About
+          li.active
+            a(href='/events') Events
+          li.active
+            a(href='/publications') Publications
+          li
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              | Tools
+              b.caret
+            ul.dropdown-menu.multi-level
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Fragaria vesca
+                ul.dropdown-menu
+                  li
+                    a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+                  li
+                    a(href='https://tinyurl.com/liuCoexp') Coexpression Network
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Rubus idaeus
+                ul.dropdown-menu
+                  li
+                    a(href='/rubus_form') EFP
+                  li
+                    a(href='/rubus_batch_form') Batch Analysis
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Prunus persica
+                ul.dropdown-menu
+                  li
+                    a(href='#') Coming soon!
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Malus domestica
+                ul.dropdown-menu
+                  li
+                    a(href='#') Coming soon!
+    .jumbotron
+        .container
+          h2.text-center Summer Bioinformatics Workshop For High School Teachers
+          h4.text-center Shepherd University (WV) and USDA-ARS-Appalachian Fruit Research Station
+          h4.text-center July 24-28, 2017
+          br
+          p#test
+            | A bioinformatics workshop for high school biology teachers will be held on the campus of Shepherd University and at the USDA-ARS Kearneysville, WV on July 24-28, 2017. This intensive 5-day workshop aims at exposing high school teachers to basic concepts and analysis skills in bioinformatics.  In addition to one day of DNA lab experience, there will be lectures on bioinformatics with hands-on bioinformatic exercises and development of bioinformatic lesson plans appropriate for high school.
+            br
+            br
+            | The basic plan for the week will include one day of ‘wet’ lab experience extracting DNA from transgenic plants and testing through PCR for transgenes. These will then be sent away for sequencing. The remaining 4 days will be spent in a computer lab with a combination of short lectures and then computer-based exercises including as examples, DNA sequencing and personal genomes, identifying components of herbal supplements using DNA barcodes, and understanding CRISPR genome editing. The week will culminate in the analysis of the earlier sequencing and the development of appropriate lesson plans.
+            br
+            br
+            | The workshop is supported by a grant from the
+            strong  National Science Foundation
+            |  and taught by scientists from USDA-ARS and University of Maryland College Park. Each participant teacher will receive a stipend of $180 per day. In addition, each teacher is encouraged to bring 2 high school students to attend the workshop and work as a team in the development of the lesson plan.
+            br
+            br
+            | To request further information or apply, please send the following information to
+            a(href='mailto:ann.callahan@ars.usda.gov')  ann.callahan@ars.usda.gov
+            | .
+          ol
+            li Your resume (include your contact formation).
+            li A brief reference letter from your school principal.
+            li
+              | A brief paragraph about your background in biological training and why you are interested in attending this workshop.
+          p#test2
+            | Please send the information in a single email and indicate "Summer Workshop" in your email subject title. Priority will be given to teachers from the Eastern Panhandle of West Virginia Public Schools.
+    .previous-events
+        h3 Previously Held Events
+        ul.list-group
+          li.list-group-item July 24-28, 2017 Summer Bioinformatics Workshop (At Shepherd University, West Virginia).
+          li.list-group-item  April 5, 2017: Project meeting held at USDA-ASR-Appalachian Fruit Research Station
+          li.list-group-item  On August 8-12, 2016, a Summer Teacher's Workshop for bioinformatics was successfully held
+          li.list-group-item  Oct. 13, 2015: Project kickoff meeting at Univ. of Maryland

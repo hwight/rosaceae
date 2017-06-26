@@ -363,6 +363,23 @@ function fill_table(){
 }
 
 
+function generate_excel(tableid) {
+  $(function() {
+    var gene_name = document.getElementById("geneName").innerHTML;
+    $(tableid).table2excel({
+      exclude: ".noExl",
+      name: "Excel Document Name",
+      filename: gene_name,
+      fileext: ".xls",
+      exclude_img: true,
+      exclude_links: true,
+      exclude_inputs: true
+    });
+  });
+}
+
+
+
 function fill_orthologs(){
     //parse json data
     var data = document.getElementById("json_res").innerHTML;
@@ -408,13 +425,13 @@ function show_orth(){
 
 
 function hide_table(){
-  $('.raw_table').hide();
+  $('.table_content').hide();
   $('#dataShow').show();
   $('#dataHide').hide();
 }
 
 function show_table(){
-  $('.raw_table').show();
+  $('.table_content').show();
   $('#dataShow').hide();
   $('#dataHide').show();
 

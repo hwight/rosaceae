@@ -16,8 +16,12 @@ router.get('/about', function(req, res, next) {
   res.render('about', { title: 'The Rosaceae Project' });
 });
 
-router.get('/test', function(req, res, next) {
-  res.render('test2', { title: 'The Rosaceae Project' });
+router.get('/events', function(req, res, next) {
+  res.render('events', { title: 'The Rosaceae Project' });
+});
+
+router.get('/publications', function(req, res, next) {
+  res.render('publications', { title: 'Publications' });
 });
 
 

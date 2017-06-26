@@ -158,3 +158,9 @@ left:80%;
   top:10px;
   margin-left:90%;
 }
+
+.table{
+    width:200px;
+    height:250px;
+    overflow:auto;
+}

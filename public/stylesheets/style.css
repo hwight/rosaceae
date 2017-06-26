@@ -100,4 +100,7 @@ h1 {
 .inner{
   display: inline-block;
 }
-  
+
+#test,#test2{
+  font-size: 1em;
+}
