@@ -17,6 +17,8 @@ html.no-js(lang='en')
     script(src='/javascripts/rainbow.js')
     script(src='/javascripts/plotly-latest.min.js')
     script(src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js")
+    script(src='/javascripts/rainbow.js')
+    script(src='/javascripts/html2canvas.js')
     script(src='/javascripts/create_efp.js')
     link(rel='stylesheet', href='/stylesheets/submenu.css')
     // css
@@ -128,7 +130,7 @@ html.no-js(lang='en')
                       label.form-control-label(for='max') Maximum:
                       input#num.form-control(type='number')
                       .modal-footer
-                        p Note: this feature is still being debugged and has only been tested on Firefox and Chrome 
+                        p Note: this feature is still being debugged and has only been tested on Firefox and Chrome
                         button.btn.btn-default(type='button',onclick="change_max()") Enter
           p
           button.btn.btn-default.btn-xs#btnSave(type='button',onclick="save_efp()") Save EFP
