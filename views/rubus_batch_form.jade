@@ -17,7 +17,8 @@ html.no-js(lang='en')
     script(src='/javascripts/rainbow.js')
     script(src='/javascripts/plotly-latest.min.js')
     script(src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js")
-    script(src='/javascripts/batch_analysis.js')
+    script(src="http://d3js.org/d3.v3.js")
+    script(src='/javascripts/batch_test.js')
     link(rel='stylesheet', href='/stylesheets/submenu.css')
     // css
     link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
@@ -71,3 +72,5 @@ html.no-js(lang='en')
         button#btnSubmit(type="button",onclick="db_calls()") Submit
     #responses.hidden
     #myDiv(style='width: 580px; height: 500px; padding-left:5em;')
+    #chart
+    #dataset-picker

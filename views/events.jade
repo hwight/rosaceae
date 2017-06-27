@@ -13,9 +13,11 @@ html.no-js(lang='en')
     // css
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto+Slab')
     link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    //link(rel="stylesheet",href="https://raw.githubusercontent.com/noreiller/bootstrap-modal-carousel/master/src/less/carousel-fit.less")
     script(src="/javascripts/bootstrap.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
     script(src='/javascripts/bootstrap.min.js')
+    //script(src='https://raw.githubusercontent.com/noreiller/bootstrap-modal-carousel/master/src/js/modal-carousel.js')
     link(rel='stylesheet', href='/stylesheets/submenu.css')
     style.
       #test,#test2{
@@ -23,6 +25,19 @@ html.no-js(lang='en')
       }
       .previous-events{
       padding:.5em;
+      }
+      .photo_tab{
+      text-align:right
+      }
+      .modal.and.carousel {
+      position: fixed; // Needed because the carousel overrides the position property
+      height:80%;
+      }
+      button{
+      padding: 0;
+      border: none;
+      background: none;
+      color: purple;
       }
   body.bg
     nav.navbar
@@ -93,10 +108,85 @@ html.no-js(lang='en')
               | A brief paragraph about your background in biological training and why you are interested in attending this workshop.
           p#test2
             | Please send the information in a single email and indicate "Summer Workshop" in your email subject title. Priority will be given to teachers from the Eastern Panhandle of West Virginia Public Schools.
+
     .previous-events
         h3 Previously Held Events
-        ul.list-group
-          li.list-group-item July 24-28, 2017 Summer Bioinformatics Workshop (At Shepherd University, West Virginia).
-          li.list-group-item  April 5, 2017: Project meeting held at USDA-ASR-Appalachian Fruit Research Station
-          li.list-group-item  On August 8-12, 2016, a Summer Teacher's Workshop for bioinformatics was successfully held
-          li.list-group-item  Oct. 13, 2015: Project kickoff meeting at Univ. of Maryland
+        table.table.table-condensed
+          thead
+          tbody
+            tr
+              td July 24-28, 2017 Summer Bioinformatics Workshop (At Shepherd University, West Virginia)
+              td
+            tr
+              td April 5, 2017: Project meeting held at USDA-ASR-Appalachian Fruit Research Station
+              td
+                button(type='button', data-toggle='modal', data-target='#fruitfarm') Photos
+                  span.glyphicon.glyphicon-camera
+            tr
+              td Dec. 14, 2016 Lectures given to high school students on the topics of "Bioinformatics", 'GMO", and "STEM" education at a charter school in College Park, MD.
+              td
+                button(type='button', data-toggle='modal', data-target='#lecture') Photos
+                  span.glyphicon.glyphicon-camera
+            tr
+              td On August 8-12, 2016, a Summer Teacher's Workshop for bioinformatics was successfully held
+              td
+                button(type='button', data-toggle='modal', data-target='#summerworkshop') Photos
+                  span.glyphicon.glyphicon-camera
+            tr Oct. 13, 2015: Project kickoff meeting at Univ. of Maryland
+
+        #fruitfarm.modal.fade.and.carousel.slide
+          .modal-dialog
+            .modal-content
+              .modal-body
+                ol.carousel-indicators
+                  li.active(data-target='#fruitfarm', data-slide-to='0')
+                  li(data-target='#fruitfarm', data-slide-to='1')
+                  li(data-target='#fruitfarm', data-slide-to='2')
+                .carousel-inner
+                  .item.active
+                    img(src='/images/fruitfarm1.jpg', alt='First slide',height="300")
+                  .item
+                    img(src='/images/fruitfarm2.jpg', alt='Second slide',height="300")
+                  .item
+                    img(src='/images/fruitfarm3.jpg', alt='Third slide',height="300")
+                // /.carousel-inner
+                a.left.carousel-control(href='#fruitfarm', role='button', data-slide='prev')
+                  span.glyphicon.glyphicon-chevron-left
+                a.right.carousel-control(href='#fruitfarm', role='button', data-slide='next')
+                  span.glyphicon.glyphicon-chevron-right
+
+        #lecture.modal.fade.and.carousel.slide
+          .modal-dialog
+            .modal-content
+              .modal-body
+                ol.carousel-indicators
+                  li.active(data-target='#lecture', data-slide-to='0')
+                .carousel-inner
+                  .item.active
+                    img(src='/images/christalking.jpg', alt='First slide',height="300")
+
+
+
+        #summerworkshop.modal.fade.and.carousel.slide
+          .modal-dialog
+            .modal-content
+              .modal-body
+                ol.carousel-indicators
+                  li.active(data-target='#summerworkshop', data-slide-to='0')
+                  li(data-target='#summerworkshop', data-slide-to='1')
+                  li(data-target='#summerworkshop', data-slide-to='2')
+                  li(data-target='#summerworkshop', data-slide-to='3')
+                .carousel-inner
+                  .item.active
+                    img(src='/images/summer_workshop1.jpg', alt='First slide',height="300")
+                  .item
+                    img(src='/images/summer_workshop2.jpg', alt='Second slide',height="300")
+                  .item
+                    img(src='/images/summer_workshop3.jpg', alt='Third slide',height="300")
+                  .item
+                    img(src='/images/summer_workshop4.jpg', alt='Third slide',height="300")
+                // /.carousel-inner
+                a.left.carousel-control(href='#summerworkshop', role='button', data-slide='prev')
+                  span.glyphicon.glyphicon-chevron-left
+                a.right.carousel-control(href='#summerworkshop', role='button', data-slide='next')
+                  span.glyphicon.glyphicon-chevron-right
