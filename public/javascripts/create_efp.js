@@ -45,7 +45,7 @@ function spacing(max,min){
   for (var i = 0; i < 4; i ++){
     spacings[i] = round(spacings[i],2);
   }
-  spacings[0]=round(min,2);
+  spacings[0]=-1.5;
   spacings[3] = round(max,2);
   console.log(spacings);
   return spacings;
@@ -152,7 +152,7 @@ function adjust_efp(max){
 
  var stages = ["0","2","4","6","9","12"];
  var rainbow = new Rainbow();
- rainbow.setNumberRange(0, max);
+ rainbow.setNumberRange(-1.5, max);
  rainbow.setSpectrum('#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177');
 
  for(var i = 0, length = stages.length; i < length; i++)
@@ -461,4 +461,5 @@ window.onload = function(){
   hide_graph();
   hide_table();
   hide_orth();
+  document.getElementById("loader").style.display = "none";
 }
