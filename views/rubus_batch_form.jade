@@ -1,39 +1,38 @@
 doctype html
 html.no-js(lang='en')
   head
+    script.
+      $(document).ready(function () {
+      $('.dropdown-toggle').dropdown();
+      });
+
     // title and meta
     meta(charset='utf-8')
     meta(content='width=device-width,initial-scale=1.0', name='viewport')
-    title The Rosaceae Project
-    // js
-    script(src="https://cdn.rawgit.com/eligrey/Blob.js/0cef2746414269b16834878a8abc52eb9d53e6bd/Blob.js")
-    script(src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js")
-    script(src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js")
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-    script(src='http://jquery-imagefit-plugin.googlecode.com/svn/trunk/jquery.imagefit-0.2.js')
-    script(src='http://html2canvas.hertzen.com/build/html2canvas.js')
-    script(src='/javascripts/bootstrap.min.js')
-    script(src='/javascripts/modernizr.js')
-    script(src='/javascripts/rainbow.js')
-    script(src='/javascripts/plotly-latest.min.js')
-    script(src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js")
-    script(src="http://d3js.org/d3.v3.js")
-    script(src='/javascripts/batch_test.js')
-    link(rel='stylesheet', href='/stylesheets/submenu.css')
+    title Events
     // css
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto+Slab')
     link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-    link(rel="stylesheet",href='/stylesheets/rubus_response_style.css')
-  body
-    nav.navbar
+    //link(rel="stylesheet",href="https://raw.githubusercontent.com/noreiller/bootstrap-modal-carousel/master/src/less/carousel-fit.less")
+    script(src="/javascripts/bootstrap.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/plotly-latest.min.js')
+    script(src='/javascripts/batch_analysis.js')
+    //script(src='https://raw.githubusercontent.com/noreiller/bootstrap-modal-carousel/master/src/js/modal-carousel.js')
+    link(rel='stylesheet', href='/stylesheets/navbar.css')
+    link(rel='stylesheet', href='/stylesheets/submenu.css')
+  body.bg
+    nav.navbar-default
       .container-fluid
-        ul.nav.navbar-nav
-          li.active
+        ul.nav.navbar-default.navbar-nav.navbar
+          li
             a(href='/') Home
-          li.active
+          li
             a(href='/about') About
-          li.active
-            a(href='/events') Events
-          li.active
+          li
+            a.active-page(href='/events') Events
+          li
             a(href='/publications') Publications
           li
             a.dropdown-toggle(href='#', data-toggle='dropdown')
@@ -64,12 +63,12 @@ html.no-js(lang='en')
                 ul.dropdown-menu
                   li
                     a(href='#') Coming soon!
-    h1= title
+    h1(style="text-align:center;padding:5px;")= title
     form#form(method="post",action="/rubus_batch")
-        p Add a comma separated list of genes below
-        textarea#genelist(cols="45",rows="5",placeholder="Bras_G00018, Bras_G00054, Bras_G00078,...", name="gene")
+        p(style="text-align:center;padding:5px;") Add a comma separated list of genes below
+        textarea#genelist(style="display: block;margin-left: auto;margin-right: auto;",cols="45",rows="5",placeholder="Bras_G00018, Bras_G00054, Bras_G00078,...", name="gene")
         p
-        button#btnSubmit(type="button",onclick="db_calls()") Submit
+        button#btnSubmit(style="display: block;margin-left: auto;margin-right: auto;",type="button",onclick="db_calls()") Submit
     #responses.hidden
     #myDiv(style='width: 580px; height: 500px; padding-left:5em;')
     #chart

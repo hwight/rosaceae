@@ -1,6 +1,66 @@
-extends layout
+doctype html
+html.no-js(lang='en')
+  head
+    script.
+      $(document).ready(function () {
+      $('.dropdown-toggle').dropdown();
+      });
 
-block content
+    // title and meta
+    meta(charset='utf-8')
+    meta(content='width=device-width,initial-scale=1.0', name='viewport')
+    title Events
+    // css
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto+Slab')
+    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    //link(rel="stylesheet",href="https://raw.githubusercontent.com/noreiller/bootstrap-modal-carousel/master/src/less/carousel-fit.less")
+    script(src="/javascripts/bootstrap.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    script(src='/javascripts/bootstrap.min.js')
+    //script(src='https://raw.githubusercontent.com/noreiller/bootstrap-modal-carousel/master/src/js/modal-carousel.js')
+    link(rel='stylesheet', href='/stylesheets/navbar.css')
+    link(rel='stylesheet', href='/stylesheets/submenu.css')
+  body.bg
+    nav.navbar-default
+      .container-fluid
+        ul.nav.navbar-default.navbar-nav.navbar
+          li
+            a(href='/') Home
+          li
+            a(href='/about') About
+          li
+            a.active-page(href='/events') Events
+          li.active
+            a(href='/publications') Publications
+          li
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              | Tools
+              b.caret
+            ul.dropdown-menu.multi-level
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Fragaria vesca
+                ul.dropdown-menu
+                  li
+                    a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+                  li
+                    a(href='https://tinyurl.com/liuCoexp') Coexpression Network
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Rubus idaeus
+                ul.dropdown-menu
+                  li
+                    a(href='/rubus_form') EFP
+                  li
+                    a(href='/rubus_batch_form') Batch Analysis
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Prunus persica
+                ul.dropdown-menu
+                  li
+                    a(href='#') Coming soon!
+              li.dropdown-submenu
+                a.dropdown-toggle(href='#', data-toggle='dropdown') Malus domestica
+                ul.dropdown-menu
+                  li
+                    a(href='#') Coming soon!
     h1(style="text-align:center;padding:5px;") Publications
     p(style="text-align:left;padding:5px;margin:7px;")  Charles Hawkins, Julie Caruana, Erin Schiksnis, and Zhongchi Liu (2016)
       a(href='https://www.nature.com/articles/srep29017')  Genome-scale DNA variant analysis identifies a SNP that underlies the yellow fruit color in wild strawberry.

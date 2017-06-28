@@ -20,17 +20,18 @@ html.no-js(lang='en')
     link(rel="stylesheet",href="/stylesheets/style.css")
     link(rel='stylesheet', href='/stylesheets/submenu.css')
     link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    link(rel="stylesheet",href="/stylesheets/navbar.css")
   body
-    nav.navbar
+    nav.navbar-default
       .container-fluid
-        ul.nav.navbar-nav
+        ul.nav.navbar-default.navbar-nav.navbar
           li.active
             a(href='/') Home
-          li.active
+          li
             a(href='/about') About
-          li.active
+          li
             a(href='/events') Events
-          li.active
+          li
             a(href='/publications') Publications
           li
             a.dropdown-toggle(href='#', data-toggle='dropdown')
@@ -61,10 +62,9 @@ html.no-js(lang='en')
                 ul.dropdown-menu
                   li
                     a(href='#') Coming soon!
-    .centered
-      h3(align='center') A Rosaceae Fruit Resource
-      p(align='center') Funded by the National Science Foundation (IOS1444987)
-      p(align='center') Managed by the University of Maryland
+    h3(style="text-align:center;padding:5px;") A Rosaceae Fruit Resource
+    h5(style="text-align:center;padding:5px;") Funded by the National Science Foundation (IOS1444987)
+    h5(style="text-align:center;padding:5px;") Managed by the University of Maryland
     div.tree_fruits
       img#apple(src="/images/apple_test.jpeg")
       img#peach(src="/images/peach2.png")

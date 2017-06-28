@@ -24,47 +24,48 @@ html.no-js(lang='en')
     // css
     link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
     link(rel="stylesheet",href='/stylesheets/rubus_response_style.css')
-  body
-    nav.navbar
-      .container-fluid
-        ul.nav.navbar-nav
-          li.active
-            a(href='/') Home
-          li.active
-            a(href='/about') About
-          li.active
-            a(href='/events') Events
-          li.active
-            a(href='/publications') Publications
-          li
-            a.dropdown-toggle(href='#', data-toggle='dropdown')
-              | Tools
-              b.caret
-            ul.dropdown-menu.multi-level
-              li.dropdown-submenu
-                a.dropdown-toggle(href='#', data-toggle='dropdown') Fragaria vesca
-                ul.dropdown-menu
-                  li
-                    a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
-                  li
-                    a(href='https://tinyurl.com/liuCoexp') Coexpression Network
-              li.dropdown-submenu
-                a.dropdown-toggle(href='#', data-toggle='dropdown') Rubus idaeus
-                ul.dropdown-menu
-                  li
-                    a(href='/rubus_form') EFP
-                  li
-                    a(href='/rubus_batch_form') Batch Analysis
-              li.dropdown-submenu
-                a.dropdown-toggle(href='#', data-toggle='dropdown') Prunus persica
-                ul.dropdown-menu
-                  li
-                    a(href='#') Coming soon!
-              li.dropdown-submenu
-                a.dropdown-toggle(href='#', data-toggle='dropdown') Malus domestica
-                ul.dropdown-menu
-                  li
-                    a(href='#') Coming soon!
+    link(rel='stylesheet', href='/stylesheets/navbar.css')
+    body
+      nav.navbar-default
+        .container-fluid
+          ul.nav.navbar-default.navbar-nav.navbar
+            li
+              a(href='/') Home
+            li
+              a(href='/about') About
+            li
+              a(href='/events') Events
+            li
+              a(href='/publications') Publications
+            li
+              a.dropdown-toggle(href='#', data-toggle='dropdown')
+                | Tools
+                b.caret
+              ul.dropdown-menu.multi-level
+                li.dropdown-submenu
+                  a.dropdown-toggle(href='#', data-toggle='dropdown') Fragaria vesca
+                  ul.dropdown-menu
+                    li
+                      a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+                    li
+                      a(href='https://tinyurl.com/liuCoexp') Coexpression Network
+                li.dropdown-submenu
+                  a.dropdown-toggle(href='#', data-toggle='dropdown') Rubus idaeus
+                  ul.dropdown-menu
+                    li
+                      a(href='/rubus_form') EFP
+                    li
+                      a(href='/rubus_batch_form') Batch Analysis
+                li.dropdown-submenu
+                  a.dropdown-toggle(href='#', data-toggle='dropdown') Prunus persica
+                  ul.dropdown-menu
+                    li
+                      a(href='#') Coming soon!
+                li.dropdown-submenu
+                  a.dropdown-toggle(href='#', data-toggle='dropdown') Malus domestica
+                  ul.dropdown-menu
+                    li
+                      a(href='#') Coming soon!
     p#json_res.hidden= response
     h1#geneName
     .EFP#EFP_content

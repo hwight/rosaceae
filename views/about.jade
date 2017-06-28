@@ -1,6 +1,7 @@
 doctype html
 html.no-js(lang='en')
   head
+  head
     script.
       $(document).ready(function () {
       $('.dropdown-toggle').dropdown();
@@ -20,17 +21,18 @@ html.no-js(lang='en')
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
     script(src='/javascripts/bootstrap.min.js')
     script(src='/javascripts/modernizr.js')
-  body.bg
-    nav.navbar
+    link(rel="stylesheet",href="/stylesheets/navbar.css")
+  body
+    nav.navbar-default
       .container-fluid
-        ul.nav.navbar-nav
-          li.active
+        ul.nav.navbar-default.navbar-nav.navbar
+          li
             a(href='/') Home
           li.active
             a(href='/about') About
-          li.active
+          li
             a(href='/events') Events
-          li.active
+          li
             a(href='/publications') Publications
           li
             a.dropdown-toggle(href='#', data-toggle='dropdown')

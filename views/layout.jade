@@ -1,31 +1,36 @@
 doctype html
-html
+html.no-js(lang='en')
   head
-    title= title
-    link(rel="stylesheet","/stylesheets/style.css")
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-    script(src="/javascripts/bootstrap.js")
-    script(src='/javascripts/bootstrap.min.js')
-    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
-    script(src='/javascripts/batch_analysis.js')
-    link(rel='stylesheet', href='/stylesheets/submenu.css')
     script.
       $(document).ready(function () {
       $('.dropdown-toggle').dropdown();
       });
 
+    // title and meta
+    meta(charset='utf-8')
+    meta(content='width=device-width,initial-scale=1.0', name='viewport')
+    title Events
+    // css
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto+Slab')
+    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    //link(rel="stylesheet",href="https://raw.githubusercontent.com/noreiller/bootstrap-modal-carousel/master/src/less/carousel-fit.less")
+    script(src="/javascripts/bootstrap.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    script(src='/javascripts/bootstrap.min.js')
+    //script(src='https://raw.githubusercontent.com/noreiller/bootstrap-modal-carousel/master/src/js/modal-carousel.js')
+    link(rel='stylesheet', href='/stylesheets/navbar.css')
+    link(rel='stylesheet', href='/stylesheets/submenu.css')
   body.bg
-    nav.navbar
+    nav.navbar-default
       .container-fluid
-        ul.nav.navbar-nav
-          li.active
+        ul.nav.navbar-default.navbar-nav.navbar
+          li
             a(href='/') Home
-          li.active
+          li
             a(href='/about') About
-          li.active
-            a(href='/events') Events
-          li.active
+          li
+            a.active-page(href='/events') Events
+          li
             a(href='/publications') Publications
           li
             a.dropdown-toggle(href='#', data-toggle='dropdown')
