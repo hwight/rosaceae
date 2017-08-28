@@ -1,0 +1,97 @@
+doctype html
+html.no-js(lang='en')
+	head
+		script.
+			$(document).ready(function () {
+			$('.dropdown-toggle').dropdown();
+			});
+		// title and meta
+		meta(charset='utf-8')
+		meta(content='width=device-width,initial-scale=1.0', name='viewport')
+		title Orthology Comparison
+		// css
+		link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto+Slab')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		// link(rel="stylesheet",href="https://raw.githubusercontent.com/noreiller/bootstrap-modal-carousel/master/src/less/carousel-fit.less")
+		script(src='/javascripts/bootstrap.js')
+		script(src='/javascripts/jquery.js')
+		script(src='/javascripts/bootstrap.min.js')
+		script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js')
+		script(src='/javascripts/validate_form.js')
+		// script(src='https://raw.githubusercontent.com/noreiller/bootstrap-modal-carousel/master/src/js/modal-carousel.js')
+		link(rel='stylesheet', href='/stylesheets/navbar.css')
+		link(rel='stylesheet', href='/stylesheets/submenu.css')
+	body.bg
+		nav.navbar-default
+			.container-fluid
+				ul.nav.navbar-default.navbar-nav.navbar
+					li
+						a(href='/') Home
+					li
+						a(href='/about') About
+					li
+						a.active-page(href='/events') Events
+					li
+						a(href='/publications') Publications
+					li
+						a.dropdown-toggle(href='#', data-toggle='dropdown')
+							| Tools
+							b.caret
+						ul.dropdown-menu.multi-level
+							li.dropdown-submenu
+								a.dropdown-toggle(href='#', data-toggle='dropdown') Fragaria vesca
+								ul.dropdown-menu
+									li
+										a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+									li
+										a(href='https://tinyurl.com/liuCoexp') Coexpression Network
+							li.dropdown-submenu
+								a.dropdown-toggle(href='#', data-toggle='dropdown') Rubus idaeus
+								ul.dropdown-menu
+									li
+										a(href='/rubus_form') EFP
+									li
+										a(href='/rubus_batch_form') Batch Analysis
+							li.dropdown-submenu
+								a.dropdown-toggle(href='#', data-toggle='dropdown') Prunus persica
+								ul.dropdown-menu
+									li
+										a(href='#') EFP-coming soon!
+									li
+										a(href='https://tinyurl.com/peach-LiuCoexp') Coexpression Network
+							li.dropdown-submenu
+								a.dropdown-toggle(href='#', data-toggle='dropdown') Malus domestica
+								ul.dropdown-menu
+									li
+										a(href='#') EFP-coming soon!
+									li
+										a(href='https://tinyurl.com/apple-LiuCoexp') Coexpression Network
+							li
+								a(href='/compare') Compare
+
+		h1.center-block(style='text-align:center;padding:5px;') Orthology Comparison
+		p.center-block(style='text-align:center;') Get orthologs of a gene and visually compare expression across species
+		br
+		br
+		p.center-block(style='text-align:center;') Please enter the gene id of interest
+		form.center-block(name='myForm',method='post', action='/ortho',onsubmit="return validateForm()")
+			p
+			input#inputUserName.center-block(type='text', placeholder='Gene id', name='gene')
+			br
+			p.center-block(style='text-align:center;') Please enter the species of this gene
+			div.text-center
+				label.radio-inline
+					input(type='radio', name='optradio')
+					i Fragaria vesca
+				label.radio-inline
+					input(type='radio', name='optradio')
+					i Rubus idaeus
+				label.radio-inline
+					input(type='radio', name='optradio')
+					i Prunus persica
+				label.radio-inline
+					input(type='radio', name='optradio')
+					i Malus domestica
+			input.hidden(name="species",id="species")
+			br
+			button#btnSubmit.center-block(type='submit') submit     

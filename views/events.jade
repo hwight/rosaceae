@@ -4,6 +4,17 @@ html.no-js(lang='en')
     script.
       $(document).ready(function () {
       $('.dropdown-toggle').dropdown();
+      $('#check').click(function () {
+      var allFilled = true;
+    
+      $(':input:not(:button)').each(function(index, element) {
+      if (element.value === '') {
+      allFilled = false;
+      }
+      });
+    
+      alert(allFilled);
+      });
       });
 
     // title and meta
@@ -86,6 +97,8 @@ html.no-js(lang='en')
                     a(href='#') EFP-coming soon!
                   li
                     a(href='https://tinyurl.com/apple-LiuCoexp') Coexpression Network
+              li
+                a(href='/compare') Compare
     .jumbotron
         .container
           h2.text-center Summer Bioinformatics Workshop For High School Teachers

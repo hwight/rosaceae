@@ -29,6 +29,10 @@ router.get('/publications', function(req, res, next) {
 });
 
 
+router.get('/compare', function(req, res, next) {
+  res.render('comparative_analysis.jade', { title: 'Orthology Comparison' });
+});
+
 router.get('/rubus_form', function(req, res, next) {
   res.render('rubus_form', { title: 'Rubus EFP' });
 });
@@ -55,6 +59,53 @@ router.post('/rubus_response', function(req, res) {
 
     });
 });
+
+
+
+
+
+router.post('/ortho', function(req, res) {
+    var db = req.db;
+    var gene = req.body.gene;
+    var species= req.body.species;
+
+    var works = false;
+
+    var collection = db.get('frag');
+    if(species == "Rubus idaeus"){
+      var collection = db.get('rubus');
+    }
+    else if(species == "Fragaria vesca"){
+      var collection = db.get('frag');
+    }
+    else if(species == "Malus domestica"){
+      var collection = db.get('malus');
+    }
+    else if(species == "Prunus persica"){
+      var collection = db.get('prunus');
+    }
+
+    var msg = species+works
+
+  
+
+  collection.find({"gene_id": gene},{},function(e,docs){
+      //res.render('error',{message:collection})
+      if (docs.length == 0)
+      {
+        res.render('error', {message: "Gene not found"});
+      }
+      else{
+        res.render('ortho_viewer',{gene_id:gene,species:species,response:JSON.stringify(docs)})
+      }
+
+  });
+
+});
+
+
+
+
 
 
 router.post('/get_gene', function(req, res) {
