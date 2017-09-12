@@ -8,3 +8,12 @@ function validateForm() {
     var checked_label = $('input[type=radio]:checked').closest('label').text();
     document.getElementById('species').value = checked_label;
 } 
+
+function validateForm2() {
+    var x = document.forms["myForm"]["gene"].value;  
+    if (x == "" ) {
+        alert("Uh-oh, looks like some things are missing on this form.");
+        return false;
+    }
+
+} 

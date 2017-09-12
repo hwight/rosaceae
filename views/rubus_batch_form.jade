@@ -104,7 +104,7 @@ html.no-js(lang='en')
     h1(style="text-align:center;padding:5px;") Rubus Batch Analysis
     img#loader(src="/images/raspberry.png",style="display:none;")
     button.mybutton#groupBySomething(style="display: block;margin-left: auto;margin-right: auto;",type="button",onclick="groupBy(this.innerHTML)") View As Z-Score
-    form#form(method="post",action="/rubus_batch")
+    form#form(method="post",action="/rubus_batch",name="myForm")
         p(style="text-align:center;padding:5px;") Add a comma separated list of genes below
         textarea#genelist(style="display: block;margin-left: auto;margin-right: auto;",cols="45",rows="5",placeholder="Bras_G00018, Bras_G00054, Bras_G00078,...", name="gene")
         p

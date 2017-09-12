@@ -1,4 +1,22 @@
+function validateForm() {
+    var x = document.forms["myForm"]["gene"].value;  
+    if (x == "") {
+        alert("Uh-oh, looks like some things are missing on this form.");
+        return false;
+    }
+
+    return true;
+} 
+
+
+
 function db_calls(){
+
+  var works = validateForm();
+
+  if (!works){
+    return;
+  }
 
   document.getElementById("loader").style.display = "block";
 

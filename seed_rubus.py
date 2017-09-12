@@ -6,6 +6,7 @@ import json
 import re
 import numpy as np
 
+#check git
 
 
 #--------------------
@@ -52,6 +53,21 @@ def get_rawCounts(file):
         counts[gene_id] = c
     return(counts)
 
+
+def makeConversion(file):
+    ids = {}
+    id_file = open(file)
+    for line in id_file:
+        line = line.strip()
+        values = line.split(" ")
+        old_id = values [0]
+        new_id = values[1]
+        ids[old_id] = new_id
+    return ids
+
+
+id_map= makeConversion("/Users/Haley/Desktop/frag_info/id_map.txt")
+
 frag_orths = makeOrthDictionary(rubus_frag)
 pyrus_orths = makeOrthDictionary(rubus_pyrus)
 prunus_orths = makeOrthDictionary(rubus_prunus)
@@ -73,6 +89,11 @@ for line in counts:
         malus = malus_orths[gene_id]
     if gene_id in frag_orths:
         frag = frag_orths[gene_id]
+        frag_list = []
+        for g in frag_orths[gene_id]:
+            m = id_map[g.strip()]
+            frag_list.append(m)
+        frag = frag_list
     if gene_id in prunus_orths:
         prunus = prunus_orths[gene_id]
     if gene_id in pyrus_orths:
