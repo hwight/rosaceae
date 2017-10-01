@@ -1,0 +1,111 @@
+.contain > div {
+    display: inline-block;
+    *display: inline; /* For IE7 */
+    zoom: 1; /* Trigger hasLayout */
+    width: 45px;
+    font-size:.7em;
+    margin-left: 50px;
+}
+
+#geneName{
+  text-align: center;
+  padding-bottom: 2em;
+  padding-top:1.5em;
+  border-bottom: 1px solid lightgray;
+}
+
+/*the modal*/
+#EFP {
+position: absolute;
+top:1%;
+left:80%;
+}
+
+.EFP{
+  position: relative;
+  top:10px;
+  left:5px;
+  right:5px;
+  width:100%;
+  height:325px;
+}
+
+
+.stage_0{
+  position:absolute;
+  left:-4%;
+  top:20%;
+  height:75%;
+}
+
+.stage0_cap{
+  position:absolute;
+  left:6%;
+  top:75%;
+}
+
+.stage_5{
+  position:absolute;
+  left:26%;
+  top:20%;
+  height:75%;
+}
+
+.stage5_cap{
+  position:absolute;
+  left:36%;
+  top:75%;
+}
+
+.stage_12{
+  position:absolute;
+  left:53%;
+  top:20%;
+  height:75%;
+}
+
+.stage12_cap{
+  position:absolute;
+  left:62%;
+  top:75%;
+}
+
+.stage_18{
+  position:absolute;
+  left:80%;
+  top:20%;
+  height:75%;
+}
+
+.stage18_cap{
+  position:absolute;
+  right:5%;
+  top:75%;
+}
+
+
+.BarGraph,.Raw,.Ortho {
+  position: relative;
+  border-top: solid lightgray 2px;
+  top:0px;
+  padding-left: 15px;
+}
+
+
+.myButton{
+  border: none;
+  padding: 0;
+  background: none;
+  position:absolute;
+  top:10px;
+  margin-left:90%;
+}
+
+.outer{
+  width:100%;
+  text-align: center;
+}
+.inner{
+  display: inline-block;
+}
+

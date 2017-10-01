@@ -10,7 +10,8 @@ import numpy as np
 #--------------------
 # database stuff...
 from pymongo import MongoClient
-client = MongoClient('mongodb://hwight:letmein@ds135382.mlab.com:35382/ros')
+#client = MongoClient('mongodb://hwight:letmein@ds135382.mlab.com:35382/ros')
+client = MongoClient();
 db = client.ros
 #--------------------
 
@@ -41,11 +42,12 @@ def makeOrthDictionary(file):
 def get_rawCounts(file):
     counts = {}
     this_file = open(file)
+    next(this_file)
     for line in this_file:
         line = line.strip()
-        values = line.split('\t')
-        gene_id = values[0]
-        c = values[1:]
+        values = line.split(',')
+        gene_id = values[1]
+        c = values[2:]
         counts[gene_id] = c
     return(counts)
 
@@ -61,26 +63,42 @@ def makeConversion(file):
         ids[old_id] = new_id
     return ids
 
+def makeMalusConversion(file):
+    ids = {}
+    id_file = open(file)
+    for line in id_file:
+        line = line.strip()
+        values = line.split(",")
+        new_id = values [0]
+        old_id = values[1]
+        ids[old_id] = new_id
+    return ids
 
 id_map= makeConversion("/Users/Haley/Desktop/frag_info/id_map.txt")
+
+
+id_map_malus= makeMalusConversion("/Users/Haley/Desktop/malus_info/apple_id.txt")
 
 frag_orths = makeOrthDictionary(malus_frag)
 pyrus_orths = makeOrthDictionary(malus_pyrus)
 rubus_orths = makeOrthDictionary(malus_rubus)
 prunus_orths = makeOrthDictionary(malus_prunus)
 
-counts = open(malus_base+"malus_list.txt")
 
+counts = get_rawCounts(malus_base+"apple_gene_sampleAve_logtpms.csv")
 
 #data
-for line in counts:
-    line = line.strip()
-    values = line.split(',')
-    gene_id = values[0]
+for gene_id in counts:
     prunus = None
     frag = None
     rubus = None
     pyrus = None
+
+    raw = counts[gene_id]
+
+    if gene_id in id_map_malus:
+        gene_id=id_map_malus[gene_id]
+
     if gene_id in prunus_orths:
         prunus = prunus_orths[gene_id]
     if gene_id in frag_orths:
@@ -94,13 +112,19 @@ for line in counts:
         rubus = rubus_orths[gene_id]
     if gene_id in pyrus_orths:
         pyrus = pyrus_orths[gene_id]
+
     gene = {
         "organism" : "malus",
         "gene_id" : gene_id,
         "prunus_ortho":prunus,
         "frag_ortho":frag,
         "rubus_ortho":rubus,
-        "pyrus_ortho":pyrus
+        "pyrus_ortho":pyrus,
+        "stage_0":[raw[0],raw[4],raw[8]],
+        "stage_6":[raw[1],raw[5],raw[9]],
+        "stage_12":[raw[2],raw[6],raw[10]],
+        "stage_20":[raw[3],raw[7],raw[11]],
+        "raw":raw
     }
     db.malus.insert_one(gene)
     print("inserted gene: ", gene_id)

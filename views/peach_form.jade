@@ -4,9 +4,9 @@ block content
 
     h1(style="text-align:center;padding:5px;").center-block= title
     p(style="text-align:center;").center-block Please enter the gene id of interest
-    form.center-block(method="post",action="/rubus_response",name='myForm',onsubmit="return validateForm2()")
+    form.center-block(method="post",action="/peach_response",name='myForm',onsubmit="return validateForm2()")
           p
-          input#inputUserName.center-block(type="text", placeholder="Bras_G00018", name="gene")
+          input#inputUserName.center-block(type="text", placeholder="Prupe.I001000.1", name="gene")
           br
           br
           p(style="text-align:center;") Optionally, set a minimum and maximum for the scale. 
@@ -16,3 +16,4 @@ block content
           br
 
           button#btnSubmit.center-block(type="submit") submit
+          

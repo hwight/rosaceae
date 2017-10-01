@@ -37,6 +37,10 @@ router.get('/rubus_form', function(req, res, next) {
   res.render('rubus_form', { title: 'Rubus EFP' });
 });
 
+router.get('/peach_form', function(req, res, next) {
+  res.render('peach_form', { title: 'Prunus persica EFP' });
+});
+
 router.get('/rubus_batch_form', function(req, res, next) {
   res.render('rubus_batch_form', { title: 'Rubus EFP' });
 });
@@ -47,6 +51,9 @@ router.post('/rubus_response', function(req, res) {
     var collection = db.get('rubus');
     var gene = req.body.gene;
 
+    var minimum = req.body.min;
+    var maximum = req.body.max;
+
   collection.find({ "gene_id": gene},{},function(e,docs){
       msg = "";
       if (docs.length == 0)
@@ -54,13 +61,32 @@ router.post('/rubus_response', function(req, res) {
         res.render('error', {message: "Not a valid rubus id"});
       }
       else{
-        res.render('rubus_response',{gene_id:gene,response:JSON.stringify(docs)})
+        res.render('rubus_response',{gene_id:gene,response:JSON.stringify(docs),min:minimum,max:maximum})
       }
 
     });
 });
 
+router.post('/peach_response', function(req, res) {
+    var db = req.db;
+    var collection = db.get('prunus');
+    var gene = req.body.gene;
 
+    var minimum = req.body.min;
+    var maximum = req.body.max;
+
+  collection.find({ "gene_id": gene},{},function(e,docs){
+      msg = "";
+      if (docs.length == 0)
+      {
+        res.render('error', {message: "Not a valid prunus id"});
+      }
+      else{
+        res.render('peach_response',{gene_id:gene,response:JSON.stringify(docs),min:minimum,max:maximum})
+      }
+
+    });
+});
 
 
 
@@ -105,7 +131,26 @@ router.post('/ortho', function(req, res) {
 
 
 
+router.post('/get_gene_comp', function(req, res) {
+    var db = req.db;
 
+    var gene = req.body.gene;
+    var species=req.body.species;
+
+    var collection = db.get(species);
+
+   collection.find({ "gene_id": gene},{},function(e,docs){
+          if (docs.length == 0)
+          {
+            res.send({message: "not found",gene_id:gene});
+          }
+          else{
+            var json_doc = docs[0];
+            res.send({message:"found", gene_id:gene, json:json_doc});
+          }
+   });
+
+});
 
 
 router.post('/get_gene', function(req, res) {

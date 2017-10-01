@@ -11,7 +11,8 @@ import numpy as np
 #--------------------
 # database stuff...
 from pymongo import MongoClient
-client = MongoClient('mongodb://hwight:letmein@ds135382.mlab.com:35382/ros')
+client = MongoClient();
+#client = MongoClient('mongodb://hwight:letmein@ds135382.mlab.com:35382/ros')
 db = client.ros
 #------------------
 
@@ -58,9 +59,10 @@ def makeOrthDictionary(file):
 def get_rawCounts(file):
     counts = {}
     this_file = open(file)
+    next(this_file)
     for line in this_file:
         line = line.strip()
-        values = line.split('\t')
+        values = line.split(',')
         gene_id = values[0]
         c = values[1:]
         counts[gene_id] = c
@@ -74,12 +76,17 @@ malus_orths = makeOrthDictionary(frag_malus)
 
 
 
-counts = open(frag_base+"gene_list.txt")
+gene_list= get_rawCounts(frag_base+"gene_list.txt")
 
 id_map=makeConversion(frag_base+"id_map.txt")
 
+raw_counts =get_rawCounts(frag_base+"straw_counts.txt")
+
+
+
+
 #data
-for line in counts:
+for line in gene_list:
     gene_id = line.strip()
     malus = None
     frag = None
@@ -95,14 +102,32 @@ for line in counts:
         pyrus = pyrus_orths[gene_id]
 
     gene_id=id_map[gene_id]
-    gene = {
-        "organism" : "frag",
-        "gene_id" : gene_id,
-        "malus_ortho":malus,
-        "rubus_ortho":rubus,
-        "prunus_ortho":prunus,
-        "pyrus_ortho":pyrus
-    }
-    db.frag.insert_one(gene)
-    print(gene)
-    print("inserted gene: ", gene_id)
+
+    if gene_id in raw_counts:
+        raw= raw_counts[gene_id]
+        cortex=raw[:5]
+        embryo=raw[5:8]
+        ghost=raw[8:11]
+        ovule=raw[11]
+        pith=raw[12:17]
+        seed=raw[17]
+        wall=raw[18:]
+
+        gene = {
+            "organism" : "frag",
+            "gene_id" : gene_id,
+            "malus_ortho":malus,
+            "rubus_ortho":rubus,
+            "prunus_ortho":prunus,
+            "pyrus_ortho":pyrus,
+            "cortex":cortex,
+            "pith":pith,
+            "seed":[ovule,seed],
+            "embryo":embryo,
+            "ghost":ghost,
+            "wall":wall,
+            "raw":raw
+        }
+
+        db.frag.insert_one(gene)
+        print("inserted gene: ", gene_id)

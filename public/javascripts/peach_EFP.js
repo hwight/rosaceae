@@ -50,6 +50,7 @@ function spacing(max,min){
 }
 
 
+
 //recolor an image
 function getPixels(img, id, color)
 {
@@ -58,9 +59,9 @@ function getPixels(img, id, color)
 
   var canvas = document.createElement("canvas");
   var ctx = canvas.getContext("2d");
-
   var originalPixels = null;
   var currentPixels = null;
+
 
   canvas.width = img.width;
   canvas.height = img.height;
@@ -80,16 +81,43 @@ function getPixels(img, id, color)
               currentPixels.data[I + 1] = newColor.G;
               currentPixels.data[I + 2] = newColor.B;
         }
-
     }
-
 
     ctx.putImageData(currentPixels, 0, 0);
     var url = canvas.toDataURL("image/png");
     item.src = url;
 }
 
-function adjust_efp( ){
+
+function change_max(){
+  var new_max = document.getElementById("num").value;
+  adjust_efp(new_max);
+  $('#myModal').modal('toggle');
+}
+
+function save_efp() {
+        document.getElementById("btnSave").style.visibility="hidden";
+        document.getElementById("Description").style.visibility="hidden";
+        document.getElementById("EFP_header").innerHTML = document.getElementById("geneName").innerHTML
+
+        html2canvas($("#EFP_content"), {
+            onrendered: function(canvas) {
+                theCanvas = canvas;
+                // Convert and download as image
+                //Canvas2Image.saveAsPNG(canvas);
+
+                theCanvas.toBlob(function(blob) {
+                  saveAs(blob, "efp.png");
+                  }, "image/png");
+
+                document.getElementById("btnSave").style.visibility="visible";
+                document.getElementById("EFP_header").innerHTML = "EFP";
+                document.getElementById("Description").style.visibility="visible";
+            }
+        });
+}
+
+function adjust_efp(max){
   //parse json data
   var data = document.getElementById("json_res").innerHTML;
   var json = JSON.parse(data);
@@ -100,8 +128,8 @@ function adjust_efp( ){
   var id = json['gene_id'];
   document.getElementById("geneName").innerHTML = id;
 
-  //get max/min input and tpm for scale
-  var all_stages = json['stage_0'].concat(json['stage_2'],json['stage_4'],json['stage_6'],json['stage_9'],json['stage_12']);
+  //get max and tpm for scale
+  var all_stages = json['stage_0'].concat(json['stage_5'],json['stage_12'],json['stage_18']);
   all_stages=all_stages.map(Number);
 
   var maximum = document.getElementById("max").innerHTML;
@@ -119,7 +147,8 @@ function adjust_efp( ){
   }
   
   min = round(min,2)
-  //***********************************************************
+
+
 
    //create tpm scale
    var c = document.getElementById("myCanvas");
@@ -145,29 +174,25 @@ function adjust_efp( ){
 
 
   //recolor images
-  var receptacle_image = new Image();
-  receptacle_image.src = ("/images/receptacle.png");
+  var hypanthium_image = new Image();
+  hypanthium_image.src = ("/images/peach_hypanthium-01.png");
   var seed_image = new Image();
-  seed_image.src = ("/images/seed.png");
+  seed_image.src = ("/images/peach_seed-01.png");
   var wall_image = new Image();
-  wall_image.src= ("/images/wall.png");
+  wall_image.src= ("/images/peach_wall-01.png");
 
-console.log(receptacle_image);
-console.log(wall_image);
-console.log(seed_image);
 
- var stages = ["0","2","4","6","9","12"];
+ var stages = ["0","5","12","18"];
  var rainbow = new Rainbow();
  rainbow.setNumberRange(min, max);
  rainbow.setSpectrum('#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177');
 
- 
  for(var i = 0, length = stages.length; i < length; i++)
  {
      var stage = stages[i];
 
      var arr_id = "stage_"+stage;
-     var r_id = "r"+stage;
+     var h_id = "h"+stage;
      var s_id = "s"+stage;
      var w_id = "w"+stage;
 
@@ -176,48 +201,19 @@ console.log(seed_image);
      var json_array = json[arr_id];
 
      //calculate rgb values based on weights
-     var r_color = hexToRgb(rainbow.colourAt(json_array[0]));
-     var s_color = hexToRgb(rainbow.colourAt(json_array[1]));
-     var w_color = hexToRgb(rainbow.colourAt(json_array[2]));
+     var h_color = hexToRgb(rainbow.colourAt(json_array[0]));
+     var s_color = hexToRgb(rainbow.colourAt(json_array[2]));
+     var w_color = hexToRgb(rainbow.colourAt(json_array[1]));
 
-     //redraw image with selected color     
-     getPixels(receptacle_image,r_id,r_color);
+     //redraw image with selected color
+     getPixels(hypanthium_image,h_id,h_color);
      getPixels(wall_image,w_id,w_color);
      getPixels(seed_image,s_id, s_color);
+
  }
-
 }
 
-function change_max(){
-  var new_max = document.getElementById("num").value;
-  adjust_efp(new_max,true);
-  $('#myModal').modal('toggle');
-}
 
-function save_efp() {
-        document.getElementById("btnSave").style.visibility="hidden";
-        document.getElementById("modalButton").style.visibility="hidden";
-        document.getElementById("Description").style.visibility="hidden";
-        document.getElementById("EFP_header").innerHTML = document.getElementById("geneName").innerHTML
-
-        html2canvas($("#EFP_content"), {
-            onrendered: function(canvas) {
-                theCanvas = canvas;
-                // Convert and download as image
-                //Canvas2Image.saveAsPNG(canvas);
-
-                theCanvas.toBlob(function(blob) {
-                  saveAs(blob, "efp.png");
-                  }, "image/png");
-
-                document.getElementById("btnSave").style.visibility="visible";
-                document.getElementById("modalButton").style.visibility="visible";
-                document.getElementById("EFP_header").innerHTML = "EFP";
-                document.getElementById("Description").style.visibility="visible";
-            }
-        });
-
-}
 
 function plot_bar_stage(){
     //parse json data
@@ -227,48 +223,35 @@ function plot_bar_stage(){
     //***********************************************************
 
     var stage0 = {
-      x: ['receptacle_0', 'seed_0', 'wall_0'],
+      x: ['hypanthium_0', 'wall_0', 'seed_0'],
       y: json['stage_0'],
       name: '0 DPA',
       type: 'bar'
     };
 
-    var stage2 = {
-      x: ['receptacle_2', 'seed_2', 'wall_2'],
-      y: json['stage_2'],
-      name: '2 DPA',
-      type: 'bar'
-    };
-
-    var stage4 = {
-      x: ['receptacle_4', 'seed_4', 'wall_4'],
-      y: json['stage_4'],
-      name: '4 DPA',
-      type: 'bar'
-    };
-
-    var stage6 = {
-      x: ['receptacle_6', 'seed_6', 'wall_6'],
-      y: json['stage_6'],
-      name: '6 DPA',
-      type: 'bar'
-    };
-
-    var stage9 = {
-      x: ['receptacle_9', 'seed_9', 'wall_9'],
-      y: json['stage_9'],
-      name: '9 DPA',
+    var stage5 = {
+      x: ['hypanthium_5', 'wall_5', 'seed_5'],
+      y: json['stage_5'],
+      name: '5 DPA',
       type: 'bar'
     };
 
     var stage12 = {
-      x: ['receptacle_12', 'seed_12', 'wall_12'],
+      x: ['hypanthium_12', 'wall_12', 'seed_12'],
       y: json['stage_12'],
       name: '12 DPA',
       type: 'bar'
     };
 
-  var data = [stage0,stage2,stage4,stage6,stage9,stage12];
+    var stage18 = {
+      x: ['hypanthium_18', 'wall_18', 'seed_18'],
+      y: json['stage_18'],
+      name: '18 DPA',
+      type: 'bar'
+    };
+
+
+  var data = [stage0,stage5,stage12,stage18];
 
   var layout = {
     barmode: 'group',
@@ -276,7 +259,7 @@ function plot_bar_stage(){
     bargap:0.2,
     title: json['gene_id'],
     yaxis: {
-      title: 'avergae log(tpm)',
+      title: 'avergae tpm',
       titlefont: {
         size: 16,
         color: 'rgb(107, 107, 107)'
@@ -301,34 +284,34 @@ function plot_bar_tissue(){
     json = json[0];
     //***********************************************************
     var stage0 = json['stage_0'];
-    var stage2 = json['stage_2'];
-    var stage4 = json['stage_4'];
-    var stage6 = json['stage_6'];
-    var stage9 = json['stage_9'];
+    var stage5 = json['stage_5'];
     var stage12 = json['stage_12'];
+    var stage18 = json['stage_18'];
 
-    var receptacle = {
-      x: ['receptacle_0', 'receptacle_2', 'receptacle_4','receptacle_6','receptacle_9','receptacle_12'],
-      y: [stage0[0],stage2[0],stage4[0],stage6[0],stage9[0],stage12[0]],
+
+    var hypanthium = {
+      x: ['hypanthium_0', 'hypanthium_5', 'hypanthium_12','hypanthium_18'],
+      y: [stage0[0],stage5[0],stage12[0],stage18[0]],
       name: 'receptacle',
       type: 'bar'
     };
 
-    var seed = {
-      x: ['seed_0', 'seed_2', 'seed_4','seed_6','seed_9','seed_12'],
-      y: [stage0[1],stage2[1],stage4[1],stage6[1],stage9[1],stage12[1]],
-      name: 'seed',
-      type: 'bar'
-    };
-
     var wall = {
-      x: ['wall_0', 'wall_2', 'wall_4','wall_6','wall_9','wall_12'],
-      y: [stage0[2],stage2[2],stage4[2],stage6[2],stage9[2],stage12[2]],
+      x: ['wall_0', 'wall_5', 'wall_12','wall_18'],
+      y: [stage0[1],stage5[1],stage12[1],stage18[1]],
       name: 'wall',
       type: 'bar'
     };
 
-  var data = [receptacle,seed,wall];
+    var seed = {
+      x: ['seed_0', 'seed_5', 'seed_12','seed_18'],
+      y: [stage0[2],stage5[2],stage12[2],stage18[2]],
+      name: 'seed',
+      type: 'bar'
+    };
+
+
+  var data = [hypanthium,seed,wall];
 
   var layout = {
     barmode: 'group',
@@ -336,7 +319,7 @@ function plot_bar_tissue(){
     bargap:0.2,
     title: json['gene_id'],
     yaxis: {
-      title: 'avergae log(tpm)',
+      title: 'avergae tpm',
       titlefont: {
         size: 16,
         color: 'rgb(107, 107, 107)'
@@ -353,57 +336,6 @@ function plot_bar_tissue(){
   Plotly.newPlot('myDiv', data,layout);
 }
 
-
-function fill_table(){
-  var data = document.getElementById("json_res").innerHTML;
-  var json = JSON.parse(data);
-  json = json[0];
-
-  raw = json['raw'];
-
-  for(var i = 0, length = raw.length; i < length; i++)
-  {
-    document.getElementById(i).innerHTML = round(raw[i],3);
-  }
-}
-
-
-function generate_excel(tableid) {
-  $(function() {
-    var gene_name = document.getElementById("geneName").innerHTML;
-    $(tableid).table2excel({
-      exclude: ".noExl",
-      name: "Excel Document Name",
-      filename: gene_name,
-      fileext: ".xls",
-      exclude_img: true,
-      exclude_links: true,
-      exclude_inputs: true
-    });
-  });
-}
-
-
-
-function fill_orthologs(){
-    //parse json data
-    var data = document.getElementById("json_res").innerHTML;
-    var json = JSON.parse(data);
-    json = json[0];
-    //***********************************************************
-
-    var malus = json["malus_ortho"];
-    var frag = json["frag_ortho"];
-    var prunus = json["prunus_ortho"];
-    var pyrus = json["pyrus_ortho"];
-    if (malus){
-      $('#malus').append( malus.join(',') );
-    }
-    if(frag){ $('#frag').append( frag.join(',') );}
-    if(prunus){$('#prunus').append( prunus.join(',') );}
-    if(pyrus){$('#pyrus').append( pyrus.join(',') );}
-}
-
 function groupBy(value){
   var occ = value
   if (occ == "Group By Stage"){
@@ -416,30 +348,38 @@ function groupBy(value){
   }
 }
 
-function hide_orth(){
-  $('.orth_list').hide();
-  $('#orthoShow').show();
-  $('#orthoHide').hide();
+
+
+function fill_table(){
+  var data = document.getElementById("json_res").innerHTML;
+  var json = JSON.parse(data);
+  json = json[0];
+
+  var raw = json['stage_0'].concat(json['stage_5'],json['stage_12'],json['stage_18']);
+  for(var i = 0, length = raw.length; i < length; i++)
+  {
+    id=i+1;
+    document.getElementById(id).innerHTML = round(raw[i],3);
+  }
 }
 
-function show_orth(){
-  $('.orth_list').show();
-  $('#orthoShow').hide();
-  $('#orthoHide').show();
-}
+function fill_orthologs(){
+    //parse json data
+    var data = document.getElementById("json_res").innerHTML;
+    var json = JSON.parse(data);
+    json = json[0];
+    //***********************************************************
 
-
-function hide_table(){
-  $('.table_content').hide();
-  $('#dataShow').show();
-  $('#dataHide').hide();
-}
-
-function show_table(){
-  $('.table_content').show();
-  $('#dataShow').hide();
-  $('#dataHide').show();
-
+    var malus = json["malus_ortho"];
+    var frag = json["frag_ortho"];
+    var rubus = json["rubus_ortho"];
+    var pyrus = json["pyrus_ortho"];
+    if (malus){
+      $('#malus').append( malus.join(',') );
+    }
+    if(frag){ $('#frag').append( frag.join(',') );}
+    if(rubus){$('#rubus').append( prunus.join(',') );}
+    if(pyrus){$('#pyrus').append( pyrus.join(',') );}
 }
 
 function hide_graph(){
@@ -456,15 +396,37 @@ function show_graph(){
   $('#graphHide').show();
 }
 
+function hide_table(){
+  $('.table_content').hide();
+  $('#dataShow').show();
+  $('#dataHide').hide();
+}
+
+function show_table(){
+  $('.table_content').show();
+  $('#dataShow').hide();
+  $('#dataHide').show();
+}
+
+function hide_orth(){
+  $('.orth_list').hide();
+  $('#orthoShow').show();
+  $('#orthoHide').hide();
+}
+
+function show_orth(){
+  $('.orth_list').show();
+  $('#orthoShow').hide();
+  $('#orthoHide').show();
+}
 
 //ready set GO!
 window.onload = function(){
-  adjust_efp(0,false);
+  adjust_efp(0);
   plot_bar_tissue();
-  fill_table();
-  fill_orthologs();
   hide_graph();
   hide_table();
   hide_orth();
-  document.getElementById("loader").style.display = "none";
+  fill_table();
+  fill_orthologs();
 }

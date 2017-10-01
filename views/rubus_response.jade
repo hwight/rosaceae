@@ -10,7 +10,6 @@ html.no-js(lang='en')
     script(src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js")
     script(src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-    script(src='http://jquery-imagefit-plugin.googlecode.com/svn/trunk/jquery.imagefit-0.2.js')
     script(src='http://html2canvas.hertzen.com/build/html2canvas.js')
     script(src='/javascripts/bootstrap.min.js')
     script(src='/javascripts/modernizr.js')
@@ -100,6 +99,8 @@ html.no-js(lang='en')
                   a(href="/compare") Compare
 
     p#json_res.hidden= response
+    p#min.hidden= min
+    p#max.hidden= max
     img#loader(src="/images/raspberry.png")
     h1#geneName
     .EFP#EFP_content
@@ -150,7 +151,7 @@ html.no-js(lang='en')
           img.stage_12(src="/images/outline.png")
           p.stage12_cap 12 DPA
         .container#EFP
-          button.btn.btn-default.btn-xs#modalButton(type='button', data-toggle='modal', data-target='#myModal') Adjust Scale
+          button.hidden.btn.btn-default.btn-xs#modalButton(type='button', data-toggle='modal', data-target='#myModal') Adjust Scale
           // Modal
           #myModal.modal.fade(role='dialog')
             .modal-dialog

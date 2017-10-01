@@ -1,0 +1,212 @@
+doctype html
+html.no-js(lang='en')
+  head
+    // title and meta
+    meta(charset='utf-8')
+    meta(content='width=device-width,initial-scale=1.0', name='viewport')
+    title The Rosaceae Project
+    // js
+    script(src="https://cdn.rawgit.com/eligrey/Blob.js/0cef2746414269b16834878a8abc52eb9d53e6bd/Blob.js")
+    script(src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js")
+    script(src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+    script(src='http://jquery-imagefit-plugin.googlecode.com/svn/trunk/jquery.imagefit-0.2.js')
+    script(src='http://html2canvas.hertzen.com/build/html2canvas.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/modernizr.js')
+    script(src='/javascripts/rainbow.js')
+    script(src='/javascripts/plotly-latest.min.js')
+    script(src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js")
+    script(src='/javascripts/rainbow.js')
+    //script(src='/javascripts/html2canvas.js')
+    script(src='/javascripts/peach_EFP.js')
+    link(rel='stylesheet', href='/stylesheets/submenu.css')
+    // css
+    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    link(rel='stylesheet', href='/stylesheets/navbar.css')
+    link(rel='stylesheet', href='/stylesheets/peach_efp.css')
+  body
+      nav.navbar-default
+        .container-fluid
+          ul.nav.navbar-default.navbar-nav.navbar
+            li
+              a(href='/') Home
+            li
+              a(href='/about') About
+            li
+              a(href='/events') Events
+            li
+              a(href='/publications') Publications
+            li
+              a.dropdown-toggle(href='#', data-toggle='dropdown')
+                | Tools
+                b.caret
+              ul.dropdown-menu.multi-level
+                li.dropdown-submenu
+                  a.dropdown-toggle(href='#', data-toggle='dropdown') Fragaria vesca
+                  ul.dropdown-menu
+                    li
+                      a(href='http://mb3.towson.edu/efp/cgi-bin/efpWeb.cgi') EFP
+                    li
+                      a(href='https://tinyurl.com/liuCoexp') Coexpression Network
+                li.dropdown-submenu
+                  a.dropdown-toggle(href='#', data-toggle='dropdown') Rubus idaeus
+                  ul.dropdown-menu
+                    li
+                      a(href='/rubus_form') EFP
+                    li
+                      a(href='/rubus_batch_form') Batch Analysis
+
+                li.dropdown-submenu
+                  a.dropdown-toggle(href='#', data-toggle='dropdown') Prunus persica
+                  ul.dropdown-menu
+                    li
+                      a(href='#') EFP-coming soon!
+                    li
+                      a(href='https://tinyurl.com/peach-LiuCoexp') Coexpression Network
+                li.dropdown-submenu
+                  a.dropdown-toggle(href='#', data-toggle='dropdown') Malus domestica
+                  ul.dropdown-menu
+                    li
+                      a(href='#') EFP-coming soon!
+                    li
+                      a(href='https://tinyurl.com/apple-LiuCoexp') Coexpression Network
+                li
+                  a(href="/compare") Compare
+    p#json_res.hidden= response
+    p#min.hidden= min
+    p#max.hidden= max
+    h1#geneName
+    .EFP#EFP_content
+      .content
+        h3#EFP_header EFP
+        .scale
+          p4.scale avg tpm
+          canvas#myCanvas(width='300', height='30')
+          .contain
+            div#l1 1
+            div#l2 2
+            div#l3 3
+            div#l4 4
+        .stage0
+          img.stage_0#h0(src="/images/peach_hypanthium-01.png")
+          img.stage_0#w0(src="/images/peach_wall-01.png")
+          img.stage_0#s0(src="/images/peach_seed-01.png")
+          img.stage_0(src="/images/peach_outline-01.png")
+          p.stage0_cap 0 DPA
+        .stage5
+          img.stage_5#h5(src="/images/peach_hypanthium-01.png")
+          img.stage_5#w5(src="/images/peach_wall-01.png")
+          img.stage_5#s5(src="/images/peach_seed-01.png")
+          img.stage_5(src="/images/peach_outline-01.png")
+          p.stage5_cap 5 DPA
+        .stage12
+          img.stage_12#h12(src="/images/peach_hypanthium-01.png")
+          img.stage_12#w12(src="/images/peach_wall-01.png")
+          img.stage_12#s12(src="/images/peach_seed-01.png")
+          img.stage_12(src="/images/peach_outline-01.png")
+          p.stage12_cap 12 DPA
+        .stage18
+          img.stage_18#h18(src="/images/peach_hypanthium-01.png")
+          img.stage_18#w18(src="/images/peach_wall-01.png")
+          img.stage_18#s18(src="/images/peach_seed-01.png")
+          img.stage_18(src="/images/peach_outline-01.png")
+          p.stage18_cap 18 DPA
+        .container#EFP
+          p
+          button.btn.btn-default.btn-xs#btnSave(type='button',onclick="save_efp()") Save EFP
+          p
+          button.btn.btn-default.btn-xs#Description(type='button', data-toggle='modal', data-target='#key') Description
+
+          #key.modal.fade(role='dialog')
+            .modal-dialog#overwrite
+              // Modal content
+              .modal-content
+                .modal-header
+                  button.close(type='button', data-dismiss='modal') ×
+                .modal-body
+                  img.img-responsive.center-block(src="/images/peach_description-01.jpg", style='width: 300px; height: 264px;')
+                  br
+                  br
+                  p DPA = days post anthesis (days after the flower is fertilized)
+
+    .BarGraph
+      h3 Bar Graph
+      div.buttons
+        button.btn.btn-default.myButton#graphShow(type='button', onclick = "show_graph()")
+          span.glyphicon.glyphicon-plus
+        button.btn.btn-default.myButton#graphHide(type='button', onclick = "hide_graph()")
+            span.glyphicon.glyphicon-minus
+      .outer
+        #myDiv.inner(style='width: 580px; height: 400px;')
+        button.btn.btn-default#groupBySomething(type='button', onclick = "groupBy(this.innerHTML)") Group By Stage
+        br
+        br
+
+    .Raw
+      h3 Raw data
+      div.buttons
+        button.btn.btn-default.myButton#dataShow(type='button', onclick = "show_table()")
+          span.glyphicon.glyphicon-plus
+        button.btn.btn-default.myButton#dataHide(type='button', onclick = "hide_table()")
+            span.glyphicon.glyphicon-minus
+
+      div.table_content
+        p(style ="text-align:center;") Scroll.
+        table.raw_table.table.table-striped.table-hover.center-block#raw_table(style='margin-left:40%;')
+          tr
+            th Sample
+            th average
+          tr
+            td hypanthium_0
+            td#1
+          tr
+            td wall_0
+            td#2
+          tr
+            td seed_0
+            td#3
+          tr
+            td hypanthium_5
+            td#4
+          tr
+            td wall_5
+            td#5
+          tr
+            td seed_5
+            td#6
+          tr
+            td hypanthium_12
+            td#7
+          tr
+            td wall_12
+            td#8
+          tr
+            td seed_12
+            td#9
+          tr
+            td hypanthium_18
+            td#10
+          tr
+            td wall_18
+            td#11
+          tr
+            td seed_18
+            td#12
+
+    .Ortho
+      h3 Orthologues
+      div.buttons
+        button.btn.btn-default.myButton#orthoShow(type='button', onclick = "show_orth()")
+          span.glyphicon.glyphicon-plus
+        button.btn.btn-default.myButton#orthoHide(type='button', onclick = "hide_orth()")
+            span.glyphicon.glyphicon-minus
+      div.orth_list
+        p Fragaria vesca
+          ul#frag
+        p Malus domestica
+          ul#malus
+        p Rubus occidentallis
+          ul#rubus
+        p Pyrus communis
+          ul#pyrus

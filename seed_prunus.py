@@ -11,7 +11,8 @@ import numpy as np
 #--------------------
 # database stuff...
 from pymongo import MongoClient
-client = MongoClient('mongodb://hwight:letmein@ds135382.mlab.com:35382/ros')
+#client = MongoClient('mongodb://hwight:letmein@ds135382.mlab.com:35382/ros')
+client = MongoClient();
 db = client.ros
 #--------------------
 
@@ -42,6 +43,7 @@ def makeOrthDictionary(file):
 def get_rawCounts(file):
     counts = {}
     this_file = open(file)
+    next(this_file)
     for line in this_file:
         line = line.strip()
         values = line.split('\t')
@@ -61,7 +63,6 @@ def makeConversion(file):
         ids[old_id] = new_id
     return ids
 
-
 id_map= makeConversion("/Users/Haley/Desktop/frag_info/id_map.txt")
 
 frag_orths = makeOrthDictionary(prunus_frag)
@@ -70,17 +71,18 @@ rubus_orths = makeOrthDictionary(prunus_rubus)
 malus_orths = makeOrthDictionary(prunus_malus)
 
 counts = open(prunus_base+"prunus_list.txt")
-
+rcounts= get_rawCounts("/Users/Haley/Desktop/prunus_info/peach_counts.txt")
 
 #data
-for line in counts:
-    line = line.strip()
-    values = line.split(',')
-    gene_id = values[0]
+for gene_id in rcounts:
     malus = None
     frag = None
     rubus = None
     pyrus = None
+
+
+    raw_counts=rcounts[gene_id]
+
     if gene_id in malus_orths:
         malus = malus_orths[gene_id]
     if gene_id in frag_orths:
@@ -94,13 +96,20 @@ for line in counts:
         rubus = rubus_orths[gene_id]
     if gene_id in pyrus_orths:
         pyrus = pyrus_orths[gene_id]
+
     gene = {
         "organism" : "prunus",
         "gene_id" : gene_id,
         "malus_ortho":malus,
         "frag_ortho":frag,
         "rubus_ortho":rubus,
-        "pyrus_ortho":pyrus
+        "pyrus_ortho":pyrus,
+        "stage_0":[raw_counts[0],raw_counts[4],raw_counts[8]],
+        "stage_5":[raw_counts[1],raw_counts[5],raw_counts[9]],
+        "stage_12":[raw_counts[2],raw_counts[6],raw_counts[10]],
+        "stage_18":[raw_counts[3],raw_counts[7],raw_counts[11]],
+        "raw":raw_counts
+
     }
     db.prunus.insert_one(gene)
     print("inserted gene: ", gene_id)

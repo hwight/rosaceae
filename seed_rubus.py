@@ -12,7 +12,8 @@ import numpy as np
 #--------------------
 # database stuff...
 from pymongo import MongoClient
-client = MongoClient('mongodb://hwight:letmein@ds135382.mlab.com:35382/ros')
+client = MongoClient()
+#client = MongoClient('mongodb://hwight:letmein@ds135382.mlab.com:35382/ros')
 db = client.ros
 #--------------------
 

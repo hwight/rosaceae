@@ -23,8 +23,9 @@ html.no-js(lang='en')
     link(rel='stylesheet', href='/stylesheets/submenu.css')
     // css
     link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-    link(rel="stylesheet",href='/stylesheets/rubus_response_style.css')
     link(rel='stylesheet', href='/stylesheets/navbar.css')
+    link(rel='stylesheet', href='/stylesheets/one-page-wonder.css')
+    link(rel='stylesheet', href='/stylesheets/format_img.css')
     body
       nav.navbar-default
         .container-fluid
@@ -72,20 +73,45 @@ html.no-js(lang='en')
                     li
                       a(href='https://tinyurl.com/apple-LiuCoexp') Coexpression Network
                 li
-                  a(href='/compare') Compare
-    h1#geneName
-    p.hidden#json_res= response
+                  a(href="/compare") Compare
+
+      nav
+        .container-fluid(style="background-color: lightgray;")
+          ul.list-inline(style="justify-content: center;display:flex; padding-top:.25cm;")
+            li Orthologues:
+            li#fv
+              a(href='#frag_vesca') Fragaria vesca
+            li#ri 
+              a(href='#rubus_id') Rubus idaeus
+            li#md 
+              a(href='#malus_dom') Malus domestica
+            li#pp 
+              a(href='#prunus_pers') Prunus persica
+
+
+      .scale(style="position:fixed;right:0px;")
+        p4 log(tpm)
+          canvas#myCanvas(width='200', height='30')
+          .contain
+            div#l1 1
+            div#l2 2
+            div#l3 3
+            div#l4 4
+
+    p.hidden.aGene#json_res= response
     p.hidden#species= species
-    .Ortho
-      h3 Orthologues
-      div.orth_list
-        p#fv Fragaria vesca
-          ul#frag
-        p#ri Rubus idaeus 
-          ul#rubus
-        p#md Malus domestica
-          ul#malus
-        p#pp Prunus persica
-          ul#prunus
-        p#pc Pyrus communis
-          ul#pyrus
+    
+    br
+    br
+    .container
+      #current_gene.featurette
+      #frag_vesca.featurette
+        hr.featurette-divider
+      #rubus_id.featurette
+        hr.featurette-divider
+      #malus_dom.featurette
+        hr.featurette-divider
+      #prunus_pers.featurette
+        hr.featurette-divider
+
+

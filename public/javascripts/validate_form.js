@@ -11,9 +11,10 @@ function validateForm() {
 
 function validateForm2() {
     var x = document.forms["myForm"]["gene"].value;  
+    var min = document.forms["myForm"]["min"].value; 
+    var max = document.forms["myForm"]["min"].value; 
     if (x == "" ) {
         alert("Uh-oh, looks like some things are missing on this form.");
         return false;
     }
-
 } 
