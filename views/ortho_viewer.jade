@@ -10,7 +10,7 @@ html.no-js(lang='en')
     script(src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js")
     script(src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-    script(src='http://jquery-imagefit-plugin.googlecode.com/svn/trunk/jquery.imagefit-0.2.js')
+    //script(src='http://jquery-imagefit-plugin.googlecode.com/svn/trunk/jquery.imagefit-0.2.js')
     script(src='http://html2canvas.hertzen.com/build/html2canvas.js')
     script(src='/javascripts/bootstrap.min.js')
     script(src='/javascripts/modernizr.js')
@@ -87,16 +87,20 @@ html.no-js(lang='en')
               a(href='#malus_dom') Malus domestica
             li#pp 
               a(href='#prunus_pers') Prunus persica
+            li
+              a(href='#descriptions') Image descriptions
 
 
       .scale(style="position:fixed;right:0px;")
-        p4 log(tpm)
-          canvas#myCanvas(width='200', height='30')
-          .contain
-            div#l1 1
-            div#l2 2
-            div#l3 3
-            div#l4 4
+        p4#scale_header log(tpm)
+        canvas#myCanvas(width='200', height='30')
+        .contain
+          div#l1 1
+          div#l2 2
+          div#l3 3
+          div#l4 4
+        button.btn-default.button.-regular#z_score(type='button',onclick="tpm_to_z()",style="z-index:2;") Z-Score
+        button.btn-default.button.-regular#log_tpm(type='button',onclick="z_to_tpm()",style="z-index:2;") log(tpm)
 
     p.hidden.aGene#json_res= response
     p.hidden#species= species
@@ -113,5 +117,25 @@ html.no-js(lang='en')
         hr.featurette-divider
       #prunus_pers.featurette
         hr.featurette-divider
+      #descriptions
+        hr.featurette-divider
+        h3 Image Descriptions
+        button.btn.btn-default.button.-regular#wall_button(type='button',onclick="show_descriptor('wall')") Ovary Wall
+        button.btn.btn-default.button.-regular#seed_button(type='button',onclick="show_descriptor('seed')") Seed
+        button.btn.btn-default.button.-regular#embryo_button(type='button',onclick="show_descriptor('embryo')") Embryo
+        button.btn.btn-default.button.-regular#receptacle_button(type='button',onclick="show_descriptor('receptacle')") Receptacle/Pedicel
+        button.btn.btn-default.button.-regular#hypanthium_button(type='button',onclick="show_descriptor('hypanthium')") Hypanthium
+
+        .images_description
+          img#allout(src="/images/all_outline-01.png",style="z-index:2;")
+          img#embryo.description(src="/images/all_embryo-01.png",style="display:none;")
+          img#wall.description(src="/images/all_wall-01.png",style="display:none;")
+          img#receptacle.description(src="/images/all_receptacle-01.png",style="display:none;")
+          img#seed.description(src="/images/all_seed-01.png",style="display:none;")
+          img#hypanthium.description(src="/images/all_hypanthiuim-01.png",style="display:none;")
+
+
+
+
 
 
