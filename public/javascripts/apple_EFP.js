@@ -49,11 +49,8 @@ function spacing(max,min){
   return spacings;
 }
 
-
-
 //recolor an image
-function getPixels(img, id, color)
-{
+function getPixels(img, id, color){
   var item = document.getElementById(id);
   var newColor = color;
 
@@ -88,13 +85,6 @@ function getPixels(img, id, color)
     item.src = url;
 }
 
-
-function change_max(){
-  var new_max = document.getElementById("num").value;
-  adjust_efp(new_max);
-  $('#myModal').modal('toggle');
-}
-
 function save_efp() {
         document.getElementById("btnSave").style.visibility="hidden";
         document.getElementById("Description").style.visibility="hidden";
@@ -117,6 +107,7 @@ function save_efp() {
         });
 }
 
+
 function adjust_efp(max){
   //parse json data
   var data = document.getElementById("json_res").innerHTML;
@@ -129,7 +120,7 @@ function adjust_efp(max){
   document.getElementById("geneName").innerHTML = id;
 
   //get max and tpm for scale
-  var all_stages = json['stage_0'].concat(json['stage_5'],json['stage_12'],json['stage_18']);
+  var all_stages = json['stage_0'].concat(json['stage_6'],json['stage_12'],json['stage_20']);
   all_stages=all_stages.map(Number);
 
   var maximum = document.getElementById("max").innerHTML;
@@ -175,14 +166,14 @@ function adjust_efp(max){
 
   //recolor images
   var hypanthium_image = new Image();
-  hypanthium_image.src = ("/images/peach_hypanthium-01.png");
+  hypanthium_image.src = ("/images/apple-hypanthium-01.png");
   var seed_image = new Image();
-  seed_image.src = ("/images/peach_seed-01.png");
+  seed_image.src = ("/images/apple-seed-01.png");
   var wall_image = new Image();
-  wall_image.src= ("/images/peach_wall-01.png");
+  wall_image.src= ("/images/apple-wall-01.png");
 
 
- var stages = ["0","5","12","18"];
+ var stages = ["0","6","12","20"];
  var rainbow = new Rainbow();
  rainbow.setNumberRange(min, max);
  rainbow.setSpectrum('#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177');
@@ -229,10 +220,10 @@ function plot_bar_stage(){
       type: 'bar'
     };
 
-    var stage5 = {
-      x: ['hypanthium_5', 'wall_5', 'seed_5'],
-      y: json['stage_5'],
-      name: '5 DPA',
+    var stage6 = {
+      x: ['hypanthium_6', 'wall_6', 'seed_6'],
+      y: json['stage_6'],
+      name: '6 DPA',
       type: 'bar'
     };
 
@@ -243,15 +234,15 @@ function plot_bar_stage(){
       type: 'bar'
     };
 
-    var stage18 = {
-      x: ['hypanthium_18', 'wall_18', 'seed_18'],
-      y: json['stage_18'],
-      name: '18 DPA',
+    var stage20 = {
+      x: ['hypanthium_20', 'wall_20', 'seed_20'],
+      y: json['stage_20'],
+      name: '20 DPA',
       type: 'bar'
     };
 
 
-  var data = [stage0,stage5,stage12,stage18];
+  var data = [stage0,stage6,stage12,stage20];
 
   var layout = {
     barmode: 'group',
@@ -259,7 +250,7 @@ function plot_bar_stage(){
     bargap:0.2,
     title: json['gene_id'],
     yaxis: {
-      title: 'avergae tpm',
+      title: 'average tpm',
       titlefont: {
         size: 16,
         color: 'rgb(107, 107, 107)'
@@ -284,27 +275,27 @@ function plot_bar_tissue(){
     json = json[0];
     //***********************************************************
     var stage0 = json['stage_0'];
-    var stage5 = json['stage_5'];
+    var stage5 = json['stage_6'];
     var stage12 = json['stage_12'];
-    var stage18 = json['stage_18'];
+    var stage18 = json['stage_20'];
 
 
     var hypanthium = {
-      x: ['hypanthium_0', 'hypanthium_5', 'hypanthium_12','hypanthium_18'],
+      x: ['hypanthium_0', 'hypanthium_6', 'hypanthium_12','hypanthium_20'],
       y: [stage0[0],stage5[0],stage12[0],stage18[0]],
       name: 'receptacle',
       type: 'bar'
     };
 
     var wall = {
-      x: ['wall_0', 'wall_5', 'wall_12','wall_18'],
+      x: ['wall_0', 'wall_6', 'wall_12','wall_20'],
       y: [stage0[1],stage5[1],stage12[1],stage18[1]],
       name: 'wall',
       type: 'bar'
     };
 
     var seed = {
-      x: ['seed_0', 'seed_5', 'seed_12','seed_18'],
+      x: ['seed_0', 'seed_6', 'seed_12','seed_20'],
       y: [stage0[2],stage5[2],stage12[2],stage18[2]],
       name: 'seed',
       type: 'bar'
@@ -319,7 +310,7 @@ function plot_bar_tissue(){
     bargap:0.2,
     title: json['gene_id'],
     yaxis: {
-      title: 'avergae tpm',
+      title: 'average tpm',
       titlefont: {
         size: 16,
         color: 'rgb(107, 107, 107)'
@@ -355,7 +346,7 @@ function fill_table(){
   var json = JSON.parse(data);
   json = json[0];
 
-  var raw = json['stage_0'].concat(json['stage_5'],json['stage_12'],json['stage_18']);
+  var raw = json['stage_0'].concat(json['stage_6'],json['stage_12'],json['stage_20']);
   for(var i = 0, length = raw.length; i < length; i++)
   {
     id=i+1;
@@ -370,13 +361,11 @@ function fill_orthologs(){
     json = json[0];
     //***********************************************************
 
-    var malus = json["malus_ortho"];
+    var prunus = json["prunus_ortho"];
     var frag = json["frag_ortho"];
     var rubus = json["rubus_ortho"];
     var pyrus = json["pyrus_ortho"];
-    if (malus){
-      $('#malus').append( malus.join(',') );
-    }
+    if (prunus){ $('#prunus').append( prunus.join(',') );}
     if(frag){ $('#frag').append( frag.join(',') );}
     if(rubus){$('#rubus').append( rubus.join(',') );}
     if(pyrus){$('#pyrus').append( pyrus.join(',') );}
@@ -426,7 +415,8 @@ window.onload = function(){
   plot_bar_tissue();
   hide_graph();
   hide_table();
-  hide_orth();
   fill_table();
+  hide_orth();
   fill_orthologs();
 }
+

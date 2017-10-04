@@ -21,69 +21,6 @@ top:1%;
 left:80%;
 }
 
-.EFP{
-  position: relative;
-  top:10px;
-  left:5px;
-  right:5px;
-  width:100%;
-  height:325px;
-}
-
-
-.stage_0{
-  position:absolute;
-  left:-4%;
-  top:20%;
-  height:75%;
-}
-
-.stage0_cap{
-  position:absolute;
-  left:6%;
-  top:75%;
-}
-
-.stage_5,.stage6{
-  position:absolute;
-  left:26%;
-  top:20%;
-  height:75%;
-}
-
-.stage5_cap,.stage6_cap{
-  position:absolute;
-  left:36%;
-  top:75%;
-}
-
-.stage_12{
-  position:absolute;
-  left:53%;
-  top:20%;
-  height:75%;
-}
-
-.stage12_cap{
-  position:absolute;
-  left:62%;
-  top:75%;
-}
-
-.stage_18,.stage_20{
-  position:absolute;
-  left:80%;
-  top:20%;
-  height:75%;
-}
-
-.stage18_cap,.stage20_cap{
-  position:absolute;
-  right:5%;
-  top:75%;
-}
-
-
 .BarGraph,.Raw,.Ortho {
   position: relative;
   border-top: solid lightgray 2px;
@@ -109,7 +46,36 @@ left:80%;
   display: inline-block;
 }
 
-.efp_img{
-  height:80%;
+
+
+
+.efp_container{
+    position:relative;
+    height:200px;
+    pointer-events: none;
 }
 
+.efp_img{
+	position: absolute;
+    width:175px;
+}
+
+.left {
+    left:0px;
+}
+
+.center{
+	left:200px;
+}
+
+.right{
+	left:400px;
+}
+
+.really_right{
+  left:600px;
+}
+
+.really_really_right{
+  left:800px;
+}

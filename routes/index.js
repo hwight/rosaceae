@@ -41,6 +41,10 @@ router.get('/peach_form', function(req, res, next) {
   res.render('peach_form', { title: 'Prunus persica EFP' });
 });
 
+router.get('/apple_form', function(req, res, next) {
+  res.render('apple_form', { title: 'Malus Domestica EFP' });
+});
+
 router.get('/rubus_batch_form', function(req, res, next) {
   res.render('rubus_batch_form', { title: 'Rubus EFP' });
 });
@@ -88,6 +92,26 @@ router.post('/peach_response', function(req, res) {
     });
 });
 
+router.post('/apple_response', function(req, res) {
+    var db = req.db;
+    var collection = db.get('malus');
+    var gene = req.body.gene;
+
+    var minimum = req.body.min;
+    var maximum = req.body.max;
+
+  collection.find({ "gene_id": gene},{},function(e,docs){
+      msg = "";
+      if (docs.length == 0)
+      {
+        res.render('error', {message: "Not a valid malus id"});
+      }
+      else{
+        res.render('apple_response',{gene_id:gene,response:JSON.stringify(docs),min:minimum,max:maximum})
+      }
+
+    });
+});
 
 
 router.post('/ortho', function(req, res) {

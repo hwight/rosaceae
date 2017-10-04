@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+    h1(style="text-align:center;padding:5px;").center-block= title
+    p(style="text-align:center;").center-block Please enter the gene id of interest
+    form.center-block(method="post",action="/apple_response",name='myForm',onsubmit="return validateForm2()")
+          p
+          input#inputUserName.center-block(type="text", placeholder="MD13G007070", name="gene")
+          br
+          br
+          p(style="text-align:center;") Optionally, set a minimum and maximum for the scale. 
+          p(style="text-align:center;color:gray;font-style:italic;font-size:x-small;") If left blank, minimum and maximum will be set to the smallest and largest count values.
+          input.center-block(type="text",placeholder="min",name="min")
+          input.center-block(type="text",placeholder="max",name="max")
+          br
+
+          button#btnSubmit.center-block(type="submit") submit
