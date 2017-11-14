@@ -97,7 +97,7 @@ function add_malus_img(gene_no,doc,min,max){
         var w_color = hexToRgb(rainbow.colourAt(stage[1]));
 
 
-        target='#m'+this_stage+"-"+gene_no;
+        target=jQuery.trim('#m'+this_stage+"-"+gene_no);
         loadImageColor('images/apple-hypanthium-01.png', 150, 150, target,target+"-hypanthium",h_color);
         loadImageColor('images/apple-wall-01.png', 150, 150, target,target+"-wall",w_color);
         loadImageColor('images/apple-seed-01.png', 150, 150, target,target+"-seed",s_color);
@@ -371,6 +371,7 @@ function db_call(gene_id,gene_no,species,target){
 
             if(e1.length == num_of_genes){
                 launch_color(false);
+                create_raw_value_list();
             }
       });
 
@@ -451,7 +452,7 @@ function launch_color(is_Zscore){
    grd.addColorStop(.5,"#fd8d3c");
    grd.addColorStop(.75,"#f03b20");
    grd.addColorStop(1,"#bd0026");
-   console.log(ctx);
+
    // fill with gradient
    ctx.fillStyle = grd;
    ctx.fillRect(10,10,200,80);
@@ -547,6 +548,7 @@ function fill_EFP(min,max,is_Zscore){
         var json = JSON.parse(rubus_docs[i]);
         var this_doc=json['json'];
         var gene_id=json['gene_id'];
+        gene_id=jQuery.trim(gene_id)
 
         if(is_Zscore){
           this_doc = convert_to_zscore(this_doc,['0','2','4','6','9','12']);
@@ -560,6 +562,7 @@ function fill_EFP(min,max,is_Zscore){
         var json = JSON.parse(peach_docs[i]);
         var this_doc=json["json"];
         var gene_id=this_doc['gene_id'];
+        gene_id=jQuery.trim(gene_id)
 
         if(is_Zscore){
           this_doc = convert_to_zscore(this_doc,['0','5','12','18']);
@@ -573,6 +576,7 @@ function fill_EFP(min,max,is_Zscore){
       var json = JSON.parse(malus_docs[i]);
       var this_doc=json["json"];
       var gene_id=this_doc['gene_id'];
+      gene_id=jQuery.trim(gene_id)
 
       if(is_Zscore){
           this_doc = convert_to_zscore(this_doc,['0','6','12','20']);
@@ -586,6 +590,7 @@ function fill_EFP(min,max,is_Zscore){
       var json = JSON.parse(frag_docs[i]);
       var this_doc=json["json"];
       var gene_id=this_doc['gene_id'];
+      gene_id=jQuery.trim(gene_id)
 
       if(is_Zscore){
         var total_counts=[];
@@ -594,7 +599,6 @@ function fill_EFP(min,max,is_Zscore){
         for (i in stages){
           this_stage = stages[i];
           total_counts=total_counts.concat(this_doc[this_stage]);
-          console.log(total_counts);
         }
         var z_scores = zScores(total_counts);
 
@@ -676,8 +680,9 @@ function fill_orthologs(){
     
     if (malus){
         for (gene in malus){
-            append_targets('malus',malus[gene],malus[gene],false);
-            db_call(malus[gene],gene,"malus","#malus_dom");
+            var mgene=jQuery.trim(malus[gene])
+            append_targets('malus',mgene,mgene,false);
+            db_call(mgene,gene,"malus","#malus_dom");
         }
     }
     else{
@@ -688,8 +693,9 @@ function fill_orthologs(){
 
     if(frag){
         for (gene in frag){
-            append_targets('frag',frag[gene],frag[gene],false);
-            db_call(frag[gene],gene,"frag","#frag_vesca");
+            var fgene=jQuery.trim(frag[gene])
+            append_targets('frag',fgene,fgene,false);
+            db_call(fgene,gene,"frag","#frag_vesca");
         }        
     }
     else{
@@ -700,8 +706,9 @@ function fill_orthologs(){
 
     if(rubus){
         for (gene in rubus){
-            append_targets('rubus',rubus[gene],rubus[gene],false);
-            db_call(rubus[gene],gene,"rubus","#rubus_id");
+            var rgene=jQuery.trim(rubus[gene])
+            append_targets('rubus',rgene,rgene,false);
+            db_call(rgene,gene,"rubus","#rubus_id");
         }
     }
     else{
@@ -711,8 +718,9 @@ function fill_orthologs(){
 
     if(prunus){
         for (gene in prunus){
-            append_targets('prunus',prunus[gene],prunus[gene],false);
-            db_call(prunus[gene],gene,"prunus","#prunus_pers");
+            var pgene=jQuery.trim(prunus[gene])
+            append_targets('prunus',pgene,pgene,false);
+            db_call(pgene,gene,"prunus","#prunus_pers");
         }        
     }
     else{
@@ -724,7 +732,6 @@ function fill_orthologs(){
 
 //make images appear and disapear for the image description section of the page
 function show_descriptor(id){
-  console.log(id);
   $('#'+id).show();
   $('#'+id+'_button').css('background-color','teal').css('color','white');
   $('.description').not('#' + id).hide();
@@ -767,6 +774,7 @@ function tpm_to_z(){
   $("#log_tpm").show();
 }
 
+//convert z score to tpm for each function
 function z_to_tpm(){
   launch_color(false);
   document.getElementById("scale_header").innerHTML='log(tpm)';
@@ -774,10 +782,256 @@ function z_to_tpm(){
   $("#z_score").show();
 }
 
+function rubus_values(rubus_docs){
+  var rubus_header=document.createElement('h4');
+  rubus_header.innerHTML="Rubus idaeus";
+  for (i in rubus_docs){
+        var json = JSON.parse(rubus_docs[i]);
+        var this_doc=json['json'];
+        var gene_id=json['gene_id'];
+        var gene_header=document.createElement('h5')
+        gene_header.innerHTML=gene_id
 
+        var new_ul=document.createElement('ul');
+
+        var stages=['0','2','4','6','9','12'];
+        for (i in stages){
+          this_stage=stages[i];
+          stage=this_doc['stage_'+this_stage];
+
+          var receptacle = round(stage[0],3);
+          var seed = round(stage[1],3);
+          var wall= round(stage[2],3);
+          
+          var r_item=document.createElement('li');
+          var s_item=document.createElement('li');
+          var w_item=document.createElement('li');
+
+          r_item.innerHTML='receptacle_'+this_stage+": "+receptacle;
+          s_item.innerHTML='seed_'+this_stage+": "+seed;
+          w_item.innerHTML='wall_'+this_stage+": "+wall;
+
+          new_ul.appendChild(r_item);
+          new_ul.appendChild(s_item);
+          new_ul.appendChild(w_item);
+        }
+
+        gene_header.appendChild(new_ul);
+        rubus_header.appendChild(gene_header);
+        console.log(document.getElementById('raw_counts'));
+        document.getElementById('raw_counts').appendChild(rubus_header);
+  }
+}
+
+function peach_values(peach_docs){
+  var header=document.createElement('h4');
+  header.innerHTML="Prunus persica";
+  
+  for (i in peach_docs){
+        var json = JSON.parse(peach_docs[i]);
+        var this_doc=json['json'];
+        var gene_id=json['gene_id'];
+        var gene_header=document.createElement('h5')
+        gene_header.innerHTML=gene_id
+
+        var new_ul=document.createElement('ul');
+
+        var stages=['0','5','12','18'];
+
+        for (i in stages){
+          this_stage=stages[i];
+          stage=this_doc['stage_'+this_stage];
+
+          var hypanthium = stage[0];
+          var seed = stage[2];
+          var wall = stage[1];
+          
+          var h_item=document.createElement('li');
+          var s_item=document.createElement('li');
+          var w_item=document.createElement('li');
+
+          h_item.innerHTML='hypanthium_'+this_stage+": "+hypanthium;
+          s_item.innerHTML='seed_'+this_stage+": "+seed;
+          w_item.innerHTML='wall_'+this_stage+": "+wall;
+
+          new_ul.appendChild(h_item);
+          new_ul.appendChild(s_item);
+          new_ul.appendChild(w_item);
+        }
+
+        gene_header.appendChild(new_ul);
+        header.appendChild(gene_header);
+        document.getElementById('raw_counts').appendChild(header);
+  }
+}
+
+function apple_values(apple_docs){
+  var header=document.createElement('h4');
+  header.innerHTML="Malus domestica";
+  
+  for (i in apple_docs){
+        var json = JSON.parse(apple_docs[i]);
+        var this_doc=json['json'];
+        var gene_id=json['gene_id'];
+        var gene_header=document.createElement('h5')
+        gene_header.innerHTML=gene_id;
+
+        var new_ul=document.createElement('ul');
+
+        var stages=['0','6','12','20'];
+
+        for (i in stages){
+          this_stage=stages[i];
+          stage=this_doc['stage_'+this_stage];
+
+          var hypanthium = stage[0];
+          var seed = stage[2];
+          var wall = stage[1];
+          
+          var h_item=document.createElement('li');
+          var s_item=document.createElement('li');
+          var w_item=document.createElement('li');
+
+          h_item.innerHTML='hypanthium_'+this_stage+": "+hypanthium;
+          s_item.innerHTML='seed_'+this_stage+": "+seed;
+          w_item.innerHTML='wall_'+this_stage+": "+wall;
+
+          new_ul.appendChild(h_item);
+          new_ul.appendChild(s_item);
+          new_ul.appendChild(w_item);
+        }
+
+        gene_header.appendChild(new_ul);
+        header.appendChild(gene_header);
+        document.getElementById('raw_counts').appendChild(header);
+  }
+}
+
+function frag_values(docs){
+  var header=document.createElement('h4');
+  header.innerHTML='Fragaria vesca';
+
+  for (i in docs){
+        var json = JSON.parse(docs[i]);
+        var doc=json['json'];
+        var gene_id=json['gene_id'];
+
+        var gene_header=document.createElement('h5')
+        gene_header.innerHTML=gene_id;
+
+       var cortex=doc["cortex"];
+       var pith=doc["pith"];
+       var embryo=doc["embryo"];
+       var seed=doc["seed"];
+       var ghost=doc["ghost"];
+       var wall =doc["wall"];
+
+        var new_ul=document.createElement('ul');
+        stages=['1','2','3','4','5'];
+        for (i in stages){
+            this_stage= stages[i];
+            
+            var c_item=document.createElement('li');
+            var w_item=document.createElement('li');
+            var p_item=document.createElement('li');
+
+            c_item.innerHTML='cortex_'+this_stage+": "+round(cortex[i],3);
+            p_item.innerHTML='pith_'+this_stage+": "+round(pith[i],3);
+            w_item.innerHTML='wall_'+this_stage+": "+round(wall[i],3);
+
+            new_ul.appendChild(c_item);
+            new_ul.appendChild(p_item);
+            new_ul.appendChild(w_item);
+
+
+            if(this_stage == '3' || this_stage == '4' || this_stage =='5'){
+                var e_item=document.createElement('li');
+                var g_item=document.createElement('li');
+
+                e_item.innerHTML='embryo_'+this_stage+": "+round(embryo[i-2],3);
+                g_item.innerHTML='ghost_'+this_stage+": "+round(ghost[i-2],3);
+
+                new_ul.appendChild(e_item);
+                new_ul.appendChild(g_item);
+            }
+            else{
+                var s_item=document.createElement('li');
+                s_item.innerHTML='embryo_'+this_stage+": "+round(seed[i],3);
+                new_ul.appendChild(s_item);
+            }
+        }
+
+        gene_header.appendChild(new_ul);
+        header.appendChild(gene_header);
+        document.getElementById('raw_counts').appendChild(header); 
+
+    }
+}
+
+
+
+
+function create_raw_value_list(){
+  var rubus_docs=Array.prototype.slice.call(document.querySelectorAll('#rubus_id .aGene')).map(function(x){return x.innerHTML});
+  var prunus_docs=Array.prototype.slice.call(document.querySelectorAll('#prunus_pers .aGene')).map(function(x){return x.innerHTML});
+  var malus_docs=Array.prototype.slice.call(document.querySelectorAll('#malus_dom .aGene')).map(function(x){return x.innerHTML});
+  var frag_docs=Array.prototype.slice.call(document.querySelectorAll('#frag_vesca .aGene')).map(function(x){return x.innerHTML});
+
+  
+  var species = document.getElementById("species").innerHTML;
+  //***********************************************************
+  var data = document.getElementById("json_res").innerHTML;
+  var json = JSON.parse(data);
+  json = json[0];
+  var id = json['gene_id']; 
+
+
+  if(species == "Rubus idaeus"){
+      var rubus_docs = [JSON.stringify({"json":json,"gene_id":id})];
+  }
+  else if(species == "Fragaria vesca"){
+    var frag_docs = [JSON.stringify({"json":json,"gene_id":id})];
+  }
+  else if(species == "Malus domestica"){
+      var malus_docs = [JSON.stringify({"json":json,"gene_id":id})];
+  }
+  else if(species == "Prunus persica"){
+      var prunus_docs = [JSON.stringify({"json":json,"gene_id":id})];
+  }
+
+  if(rubus_docs){
+    rubus_values(rubus_docs);
+  }
+
+
+  if(prunus_docs){
+    peach_values(prunus_docs);
+  }
+
+  if(malus_docs){
+    apple_values(malus_docs);
+  }
+  if(frag_docs){
+    frag_values(frag_docs);
+  }
+
+}
+
+function hide_raw(){
+  $('#raw_counts').hide();
+  $('#showButton').show();
+  $('#hideButton').hide();
+}
+
+function show_raw(){
+  $('#raw_counts').show();
+  $('#showButton').hide();
+  $('#hideButton').show();
+}
 
 //ready set GO!
 window.onload = function(){
   $("#log_tpm").hide();
   fill_orthologs();
+  hide_raw();
 }

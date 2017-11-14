@@ -89,6 +89,8 @@ html.no-js(lang='en')
               a(href='#prunus_pers') Prunus persica
             li
               a(href='#descriptions') Image descriptions
+            li
+              a(href='#raw_counts_container') Raw Data
 
 
       .scale(style="position:fixed;right:0px;")
@@ -133,6 +135,16 @@ html.no-js(lang='en')
           img#receptacle.description(src="/images/all_receptacle-01.png",style="display:none;")
           img#seed.description(src="/images/all_seed-01.png",style="display:none;")
           img#hypanthium.description(src="/images/all_hypanthiuim-01.png",style="display:none;")
+      #raw_counts_container(style="position:relative;")
+        hr.featurette-divider
+        h3 Raw Counts
+        button.btn.btn-default.myButton#showButton(type='button', onclick = "show_raw()")
+          span.glyphicon.glyphicon-plus
+        button.btn.btn-default.myButton#hideButton(type='button', onclick = "hide_raw()")
+            span.glyphicon.glyphicon-minus
+        #raw_counts(style="overflow:scroll;height:350px;")
+
+
 
 
 
