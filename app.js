@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 
-var mongo = require('mongodb');
+//var mongo = require('mongodb');
 var monk = require('monk');
 
 var db = monk('mongodb://user:readonly@ds135382.mlab.com:35382/ros');
