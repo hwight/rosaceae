@@ -760,7 +760,7 @@ function zScores(array){
     var std = Math.sqrt(variance);
 
     return array.map(function(num) {
-      var zscore= (num - mean) / std
+      var zscore= (num - mean) / std;
       if (std == 0){return 0;}
       return (round(zscore,4));
     });
@@ -793,6 +793,7 @@ function rubus_values(rubus_docs){
         gene_header.innerHTML=gene_id
 
         var new_ul=document.createElement('ul');
+        new_ul.className="list-group"
 
         var stages=['0','2','4','6','9','12'];
         for (i in stages){
@@ -804,8 +805,11 @@ function rubus_values(rubus_docs){
           var wall= round(stage[2],3);
           
           var r_item=document.createElement('li');
+          r_item.className="list-group-item"
           var s_item=document.createElement('li');
+          s_item.className="list-group-item"
           var w_item=document.createElement('li');
+          w_item.className="list-group-item"
 
           r_item.innerHTML='receptacle_'+this_stage+": "+receptacle;
           s_item.innerHTML='seed_'+this_stage+": "+seed;
@@ -818,8 +822,7 @@ function rubus_values(rubus_docs){
 
         gene_header.appendChild(new_ul);
         rubus_header.appendChild(gene_header);
-        console.log(document.getElementById('raw_counts'));
-        document.getElementById('raw_counts').appendChild(rubus_header);
+        document.getElementById('rubus_table').appendChild(rubus_header);
   }
 }
 
@@ -835,6 +838,7 @@ function peach_values(peach_docs){
         gene_header.innerHTML=gene_id
 
         var new_ul=document.createElement('ul');
+        new_ul.className="list-group"
 
         var stages=['0','5','12','18'];
 
@@ -842,13 +846,16 @@ function peach_values(peach_docs){
           this_stage=stages[i];
           stage=this_doc['stage_'+this_stage];
 
-          var hypanthium = stage[0];
-          var seed = stage[2];
-          var wall = stage[1];
+          var hypanthium = round(stage[0],3);
+          var seed = round(stage[2],3);
+          var wall = round(stage[1],3);
           
           var h_item=document.createElement('li');
+          h_item.className="list-group-item"
           var s_item=document.createElement('li');
+          s_item.className="list-group-item"
           var w_item=document.createElement('li');
+          w_item.className="list-group-item"
 
           h_item.innerHTML='hypanthium_'+this_stage+": "+hypanthium;
           s_item.innerHTML='seed_'+this_stage+": "+seed;
@@ -861,7 +868,7 @@ function peach_values(peach_docs){
 
         gene_header.appendChild(new_ul);
         header.appendChild(gene_header);
-        document.getElementById('raw_counts').appendChild(header);
+        document.getElementById('prunus_table').appendChild(header);
   }
 }
 
@@ -877,6 +884,7 @@ function apple_values(apple_docs){
         gene_header.innerHTML=gene_id;
 
         var new_ul=document.createElement('ul');
+        new_ul.className="list-group"
 
         var stages=['0','6','12','20'];
 
@@ -884,13 +892,16 @@ function apple_values(apple_docs){
           this_stage=stages[i];
           stage=this_doc['stage_'+this_stage];
 
-          var hypanthium = stage[0];
-          var seed = stage[2];
-          var wall = stage[1];
+          var hypanthium = round(stage[0],3);
+          var seed = round(stage[2],3);
+          var wall = round(stage[1],3);
           
           var h_item=document.createElement('li');
+          h_item.className="list-group-item"
           var s_item=document.createElement('li');
+          s_item.className="list-group-item"
           var w_item=document.createElement('li');
+          w_item.className="list-group-item"
 
           h_item.innerHTML='hypanthium_'+this_stage+": "+hypanthium;
           s_item.innerHTML='seed_'+this_stage+": "+seed;
@@ -903,7 +914,7 @@ function apple_values(apple_docs){
 
         gene_header.appendChild(new_ul);
         header.appendChild(gene_header);
-        document.getElementById('raw_counts').appendChild(header);
+        document.getElementById('malus_table').appendChild(header);
   }
 }
 
@@ -927,13 +938,17 @@ function frag_values(docs){
        var wall =doc["wall"];
 
         var new_ul=document.createElement('ul');
+        new_ul.className="list-group"
         stages=['1','2','3','4','5'];
         for (i in stages){
             this_stage= stages[i];
             
             var c_item=document.createElement('li');
+            c_item.className="list-group-item"
             var w_item=document.createElement('li');
+            w_item.className="list-group-item"
             var p_item=document.createElement('li');
+            p_item.className="list-group-item"
 
             c_item.innerHTML='cortex_'+this_stage+": "+round(cortex[i],3);
             p_item.innerHTML='pith_'+this_stage+": "+round(pith[i],3);
@@ -949,7 +964,9 @@ function frag_values(docs){
                 var g_item=document.createElement('li');
 
                 e_item.innerHTML='embryo_'+this_stage+": "+round(embryo[i-2],3);
+                e_item.className="list-group-item"
                 g_item.innerHTML='ghost_'+this_stage+": "+round(ghost[i-2],3);
+                g_item.className="list-group-item"
 
                 new_ul.appendChild(e_item);
                 new_ul.appendChild(g_item);
@@ -957,13 +974,14 @@ function frag_values(docs){
             else{
                 var s_item=document.createElement('li');
                 s_item.innerHTML='embryo_'+this_stage+": "+round(seed[i],3);
+                s_item.className="list-group-item"
                 new_ul.appendChild(s_item);
             }
         }
 
         gene_header.appendChild(new_ul);
         header.appendChild(gene_header);
-        document.getElementById('raw_counts').appendChild(header); 
+        document.getElementById('frag_table').appendChild(header); 
 
     }
 }
