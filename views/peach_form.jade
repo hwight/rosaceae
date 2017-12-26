@@ -1,6 +1,11 @@
 extends layout
 
 block content
+    #myModal.modal
+    // Modal content
+      .modal-content
+         span.close ×
+         p Some text in the Modal..
 
     h1(style="text-align:center;padding:5px;").center-block= title
     p(style="text-align:center;").center-block Please enter the gene id of interest

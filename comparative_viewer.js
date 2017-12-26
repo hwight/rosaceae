@@ -370,7 +370,6 @@ function db_call(gene_id,gene_no,species,target){
             var e1 = document.querySelectorAll('.aGene');
 
             if(e1.length == num_of_genes){
-                console.log("here")
                 launch_color(false);
                 create_raw_value_list();
             }
@@ -426,11 +425,8 @@ function launch_color(is_Zscore){
 
     for (i in docs){
         this_doc=docs[i];
-
         this_doc=JSON.parse(this_doc);
 
-        if(this_doc['message']=='found'){
-          console.log("okay")
         //the first doc aka current doc is weird
         if (i == 0){
             this_doc=this_doc[0];
@@ -438,10 +434,8 @@ function launch_color(is_Zscore){
         else{
             this_doc=this_doc['json'];
         }
-
-          if(is_Zscore){raw_counts=raw_counts.concat(zScores(this_doc['raw']));}
-          else{raw_counts=raw_counts.concat(this_doc['raw']);}
-        }
+        if(is_Zscore){raw_counts=raw_counts.concat(zScores(this_doc['raw']));}
+        else{raw_counts=raw_counts.concat(this_doc['raw']);}
     }  
 
 
