@@ -1,6 +1,12 @@
 function validateForm() {
-    var x = document.forms["myForm"]["gene"].value;  
-    if (x == "") {
+    var x = document.forms["myForm"]["genelist"].value;  
+    console.log(x)
+    var pass = document.forms["myForm"]["pass"].value;  
+    if(pass != "rubusrules"){
+        alert("Incorrect or missing password. Try Again.");
+        return false;
+    }  
+    else if (x == "") {
         alert("Uh-oh, looks like some things are missing on this form.");
         return false;
     }

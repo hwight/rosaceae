@@ -1,17 +1,13 @@
 extends layout
-
 block content
-    #myModal.modal
-    // Modal content
-      .modal-content
-         span.close ×
-         p Some text in the Modal..
 
     h1(style="text-align:center;padding:5px;").center-block= title
     p(style="text-align:center;").center-block Please enter the gene id of interest
     form.center-block(method="post",action="/peach_response",name='myForm',onsubmit="return validateForm2()")
           p
           input#inputUserName.center-block(type="text", placeholder="PPE_001G00230", name="gene")
+          h5(style="text-align:center;padding:5px;") This data isn't quite ready for everyone, please enter a password
+          input#pass.center-block(type="password", placeholder="password", name="pass")
           br
           br
           p(style="text-align:center;") Optionally, set a minimum and maximum for the scale. 
