@@ -129,6 +129,11 @@ html.no-js(lang='en')
           thead
           tbody
             tr
+              td January 31, 2018: Project meeting held at USDA-ASR-Appalachian Fruit Research Station
+              td
+                button(type='button', data-toggle='modal', data-target='#meeting2018') Photos
+                  span.glyphicon.glyphicon-camera
+            tr
               td July 24-28, 2017 Summer Bioinformatics Workshop (At Shepherd University, West Virginia)
               td
                 button(type='button', data-toggle='modal', data-target='#summerworkshop2017') Photos
@@ -150,6 +155,25 @@ html.no-js(lang='en')
                   span.glyphicon.glyphicon-camera
             tr 
               td Oct. 13, 2015: Project kickoff meeting at Univ. of Maryland
+
+        #meeting2018.modal.fade.and.carousel.slide
+          .modal-dialog
+            .modal-content
+              .modal-body
+                ol.carousel-indicators
+                  li.active(data-target='#meeting2018', data-slide-to='0')
+                  li(data-target='#meeting2018', data-slide-to='1')
+                .carousel-inner
+                  .item.active
+                    img(src='/images/farm1.jpg', alt='First slide',height="300")
+                  .item
+                    img(src='/images/farm2.jpg', alt='Second slide',height="300")
+                // /.carousel-inner
+                a.left.carousel-control(href='#meeting2018', role='button', data-slide='prev')
+                  br
+                  span.glyphicon.glyphicon-chevron-left
+                a.right.carousel-control(href='#meeting2018', role='button', data-slide='next')
+                  span.glyphicon.glyphicon-chevron-right
 
         #fruitfarm.modal.fade.and.carousel.slide
           .modal-dialog
