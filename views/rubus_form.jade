@@ -7,15 +7,7 @@ block content
     form.center-block(method="post",action="/rubus_response",name='myForm',onsubmit="return validateForm2()")
           p
           input#inputUserName.center-block(type="text", placeholder="Bras_G00018", name="gene")
-          h5(style="text-align:center;padding:5px;") This data isn't quite ready for everyone, please enter a password
-          input#pass.center-block(type="password", placeholder="password", name="pass")
-          br
-          br
-          br
-          p(style="text-align:center;") Optionally, set a minimum and maximum for the scale. 
-          p(style="text-align:center;color:gray;font-style:italic;font-size:x-small;") If left blank, minimum and maximum will be set to the smallest and largest count values.
-          input.center-block(type="text",placeholder="min",name="min")
-          input.center-block(type="text",placeholder="max",name="max")
+          
           br
 
           button#btnSubmit.center-block(type="submit") submit

@@ -123,6 +123,7 @@ router.post('/ortho', function(req, res) {
     var collection = db.get('frag');
     if(species == "Rubus idaeus"){
       var collection = db.get('rubus');
+      works=true;
     }
     else if(species == "Fragaria vesca"){
       var collection = db.get('frag');
@@ -134,7 +135,7 @@ router.post('/ortho', function(req, res) {
       var collection = db.get('prunus');
     }
 
-    var msg = species+works
+    var msg = species+gene
 
   
 
@@ -142,7 +143,7 @@ router.post('/ortho', function(req, res) {
       //res.render('error',{message:collection})
       if (docs.length == 0)
       {
-        res.render('error', {message: "Gene not found"});
+        res.render('error', {message: msg});
       }
       else{
         res.render('ortho_viewer',{gene_id:gene,species:species,response:JSON.stringify(docs)})

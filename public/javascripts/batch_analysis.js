@@ -1,28 +1,9 @@
-function validateForm() {
-    var x = document.forms["myForm"]["genelist"].value;  
-    console.log(x)
-    var pass = document.forms["myForm"]["pass"].value;  
-    if(pass != "rubusrules"){
-        alert("Incorrect or missing password. Try Again.");
-        return false;
-    }  
-    else if (x == "") {
-        alert("Uh-oh, looks like some things are missing on this form.");
-        return false;
-    }
 
-    return true;
-} 
 
 
 
 function db_calls(){
 
-  var works = validateForm();
-
-  if (!works){
-    return;
-  }
 
   document.getElementById("loader").style.display = "block";
 
